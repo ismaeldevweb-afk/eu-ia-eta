@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Artigo do blog Eu + IA, com prompts reais e bastidores de criacao."
+    />
+    <title>Artigo | Eu + IA</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body class="article-page">
+    <div class="site-shell">
+      <header class="article-topbar">
+        <a class="back-link" href="/" aria-label="Voltar para a pagina inicial do blog">
+          <span aria-hidden="true">←</span> Voltar para o blog
+        </a>
+        <a class="brand-link" href="/" aria-label="Ir para a pagina inicial">Eu + IA</a>
+      </header>
+
+      <main id="main-content">
+        <article class="article-reader" aria-live="polite">
+          <header class="article-hero">
+            <p class="article-kicker">Making-of publicado</p>
+            <h1 id="article-title">Carregando artigo...</h1>
+            <p id="article-description" class="article-description"></p>
+            <p id="article-meta" class="article-meta"></p>
+          </header>
+          <div id="article-content" class="article-content"></div>
+          <footer id="article-footer" class="article-footer"></footer>
+        </article>
+      </main>
+    </div>
+
+    <script type="module" src="/src/article.ts"></script>
+  </body>
+</html>

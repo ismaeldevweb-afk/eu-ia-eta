@@ -1,0 +1,18 @@
+[
+  {
+    "slug": "como-construi-ismael-dev-studio",
+    "title": "Como construí o Ismael Dev Studio: do código à presença profissional online",
+    "description": "O making-of de uma vitrine profissional feita com Next.js, SEO, performance e foco em conversão pelo WhatsApp.",
+    "date": "2026-05-02",
+    "tags": ["nextjs", "typescript", "seo", "vercel"],
+    "readingMinutes": 7
+  },
+  {
+    "slug": "making-of-blog-eu-ia",
+    "title": "O making-of da criação do blog Eu + IA",
+    "description": "Como a ideia de um diário de criação com prompts virou uma interface editorial com Markdown, TypeScript, screenshots e blocos copiáveis.",
+    "date": "2026-04-28",
+    "tags": ["html", "css", "typescript", "prompt engineering"],
+    "readingMinutes": 11
+  }
+]

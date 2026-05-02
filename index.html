@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Eu + IA: um diario de criacao onde prompts e inteligencia artificial viram produtos reais."
+    />
+    <title>Eu + IA</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body class="home-page">
+    <div class="site-shell">
+      <header class="site-header" aria-label="Apresentacao do blog">
+        <div class="hero-content">
+          <p class="site-kicker">Diario de criacao com IA</p>
+          <h1>Eu + IA</h1>
+          <p class="site-signature">
+            Um laboratorio editorial onde prompts, tentativas e decisoes humanas
+            viram produtos reais.
+          </p>
+          <div class="hero-actions" aria-label="Acoes principais">
+            <a class="button-link is-primary" href="#artigos">Ler artigos</a>
+            <a class="button-link is-secondary" href="#comece">Comece por aqui</a>
+          </div>
+        </div>
+        <div class="hero-proof" aria-label="Resumo do blog">
+          <span>Prompts reais</span>
+          <span>Making-of aberto</span>
+          <span>HTML + TypeScript</span>
+        </div>
+      </header>
+
+      <main id="main-content">
+        <section id="comece" class="start-section" aria-labelledby="start-title">
+          <div class="section-heading">
+            <p class="section-kicker">Comece por aqui</p>
+            <h2 id="start-title">Tres portas de entrada para acompanhar o processo.</h2>
+          </div>
+          <div class="start-grid">
+            <a class="start-card" href="/article.html?slug=making-of-blog-eu-ia">
+              <span class="start-number">01</span>
+              <strong>Leia o making-of</strong>
+              <span>Entenda como a identidade, a estrutura e o primeiro MVP nasceram.</span>
+            </a>
+            <a class="start-card" href="/article.html?slug=making-of-blog-eu-ia#o-prompt-inicial">
+              <span class="start-number">02</span>
+              <strong>Veja os prompts</strong>
+              <span>Compare pedidos, escolhas de interface e respostas que viraram tela.</span>
+            </a>
+            <a class="start-card" href="/?tag=prompt%20engineering">
+              <span class="start-number">03</span>
+              <strong>Explore por tema</strong>
+              <span>Use as tags para encontrar artigos por ferramenta, linguagem ou metodo.</span>
+            </a>
+          </div>
+        </section>
+
+        <section id="artigos" class="post-list-section" aria-labelledby="posts-title">
+          <div class="section-heading is-inline">
+            <div>
+              <p class="section-kicker">Artigos recentes</p>
+              <h2 id="posts-title">Bastidores publicados</h2>
+            </div>
+            <p>Relatos curtos, prompts reais e decisoes praticas de construcao.</p>
+          </div>
+          <div id="filter-state" class="filter-state" hidden></div>
+          <div id="posts-list" class="post-list" aria-live="polite">
+            <p class="loading-state">Carregando artigos...</p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        Criado com HTML, CSS, TypeScript e um toque de IA.
+      </footer>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

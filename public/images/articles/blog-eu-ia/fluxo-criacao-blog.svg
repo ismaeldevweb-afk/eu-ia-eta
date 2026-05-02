@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Fluxo de criacao do blog Eu + IA</title>
+  <desc id="desc">Diagrama com as etapas: ideia, prompt, conteudo, renderizacao, artigo e evolucao.</desc>
+  <rect width="1200" height="620" fill="#fdfbf7"/>
+  <path d="M0 70H1200M0 140H1200M0 210H1200M0 280H1200M0 350H1200M0 420H1200M0 490H1200M0 560H1200" stroke="#d8e8f5" stroke-width="1" opacity=".72"/>
+  <path d="M80 0V620M160 0V620M240 0V620M320 0V620M400 0V620M480 0V620M560 0V620M640 0V620M720 0V620M800 0V620M880 0V620M960 0V620M1040 0V620M1120 0V620" stroke="#d8e8f5" stroke-width="1" opacity=".72"/>
+  <text x="70" y="72" fill="#2b6cb0" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">PROCESSO EDITORIAL</text>
+  <text x="70" y="124" fill="#1e1e1e" font-family="Georgia, 'Times New Roman', serif" font-size="48" font-weight="700">Como o Eu + IA transforma prompts em artigos</text>
+  <text x="70" y="162" fill="#5c5c5c" font-family="Inter, Arial, sans-serif" font-size="20">Da ideia inicial ao post publicado, cada etapa deixa um rastro visivel para o leitor.</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2L10 6L2 10" fill="none" stroke="#2b6cb0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="70" y="238" width="150" height="116" rx="8" fill="#f3f0eb" stroke="#a0c4e8"/>
+    <text x="94" y="276" fill="#2b6cb0" font-size="17" font-weight="800">01 IDEIA</text>
+    <text x="94" y="309" fill="#1e1e1e" font-size="21" font-weight="800">Problema</text>
+    <text x="94" y="337" fill="#5c5c5c" font-size="16">O que mostrar?</text>
+
+    <rect x="270" y="238" width="150" height="116" rx="8" fill="#eef2f5" stroke="#a0c4e8"/>
+    <text x="294" y="276" fill="#2b6cb0" font-size="17" font-weight="800">02 PROMPT</text>
+    <text x="294" y="309" fill="#1e1e1e" font-size="21" font-weight="800">Direcao</text>
+    <text x="294" y="337" fill="#5c5c5c" font-size="16">Pedido claro</text>
+
+    <rect x="470" y="238" width="150" height="116" rx="8" fill="#f3f0eb" stroke="#a0c4e8"/>
+    <text x="494" y="276" fill="#2b6cb0" font-size="17" font-weight="800">03 CONTEUDO</text>
+    <text x="494" y="309" fill="#1e1e1e" font-size="21" font-weight="800">Markdown</text>
+    <text x="494" y="337" fill="#5c5c5c" font-size="16">Texto editavel</text>
+
+    <rect x="670" y="238" width="150" height="116" rx="8" fill="#eef2f5" stroke="#a0c4e8"/>
+    <text x="694" y="276" fill="#2b6cb0" font-size="17" font-weight="800">04 RENDER</text>
+    <text x="694" y="309" fill="#1e1e1e" font-size="21" font-weight="800">TypeScript</text>
+    <text x="694" y="337" fill="#5c5c5c" font-size="16">HTML na tela</text>
+
+    <rect x="870" y="238" width="150" height="116" rx="8" fill="#f3f0eb" stroke="#a0c4e8"/>
+    <text x="894" y="276" fill="#2b6cb0" font-size="17" font-weight="800">05 ARTIGO</text>
+    <text x="894" y="309" fill="#1e1e1e" font-size="21" font-weight="800">Leitura</text>
+    <text x="894" y="337" fill="#5c5c5c" font-size="16">Historia clara</text>
+
+    <line x1="230" y1="296" x2="260" y2="296" stroke="#2b6cb0" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="430" y1="296" x2="460" y2="296" stroke="#2b6cb0" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="630" y1="296" x2="660" y2="296" stroke="#2b6cb0" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="830" y1="296" x2="860" y2="296" stroke="#2b6cb0" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <path d="M945 368C945 442 780 472 570 472C360 472 145 442 145 368" fill="none" stroke="#2b6cb0" stroke-width="3" stroke-dasharray="9 10" marker-end="url(#arrow)"/>
+    <text x="406" y="515" fill="#1e1e1e" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700">O ciclo continua a cada novo projeto</text>
+    <text x="334" y="550" fill="#5c5c5c" font-size="18">Novos prompts, novos aprendizados e novos artigos documentando o making-of.</text>
+  </g>
+</svg>
