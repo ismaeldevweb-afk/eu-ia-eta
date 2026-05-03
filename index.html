@@ -5,24 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Eu + IA: um diario de criacao onde prompts e inteligencia artificial viram produtos reais."
+      content="Eu + IA: um diário de criação onde prompts, inteligência artificial e decisões humanas viram produtos reais."
     />
-    <title>Eu + IA</title>
+    <title>Eu + IA | Prompts, IA e bastidores de projetos reais</title>
     <link rel="stylesheet" href="/src/styles.css" />
   </head>
   <body class="home-page">
     <div class="site-shell">
-      <header class="site-header" aria-label="Apresentacao do blog">
-        <div class="hero-content">
-          <p class="site-kicker">Diario de criacao com IA</p>
-          <h1>Eu + IA</h1>
-          <p class="site-signature">
-            Um laboratorio editorial onde prompts, tentativas e decisoes humanas
-            viram produtos reais.
-          </p>
-          <div class="hero-actions" aria-label="Acoes principais">
-            <a class="button-link is-primary" href="#artigos">Ler artigos</a>
-            <a class="button-link is-secondary" href="#comece">Comece por aqui</a>
+      <header class="site-header" aria-label="Apresentação do blog">
+        <div class="hero-layout">
+          <div class="hero-content">
+            <p class="site-kicker">Diário de criação com IA</p>
+            <h1>Eu + IA</h1>
+            <p class="site-signature">
+              Prompts reais, decisões humanas e bastidores de desenvolvimento
+              transformados em produtos digitais.
+            </p>
+            <div class="hero-actions" aria-label="Ações principais">
+              <a class="button-link is-primary" href="#artigos">Ler artigos</a>
+              <a class="button-link is-secondary" href="#comece">Comece por aqui</a>
+              <a class="button-link is-secondary" href="/sobre/">Sobre</a>
+            </div>
+          </div>
+          <div class="hero-terminal" aria-label="Exemplo de prompt do blog">
+            <div class="terminal-topline">
+              <span>prompt.md</span>
+              <span>Eu + IA</span>
+            </div>
+            <pre><code>Objetivo:
+documentar como uma ideia vira produto.
+
+Entrada:
+prompt + contexto + decisões.
+
+Saída:
+artigo real, código real, aprendizado real.</code></pre>
           </div>
         </div>
         <div class="hero-proof" aria-label="Resumo do blog">
@@ -36,15 +53,15 @@
         <section id="comece" class="start-section" aria-labelledby="start-title">
           <div class="section-heading">
             <p class="section-kicker">Comece por aqui</p>
-            <h2 id="start-title">Tres portas de entrada para acompanhar o processo.</h2>
+            <h2 id="start-title">Três portas de entrada para acompanhar o processo.</h2>
           </div>
           <div class="start-grid">
-            <a class="start-card" href="/article.html?slug=making-of-blog-eu-ia">
+            <a class="start-card" href="/blog/making-of-blog-eu-ia/">
               <span class="start-number">01</span>
               <strong>Leia o making-of</strong>
               <span>Entenda como a identidade, a estrutura e o primeiro MVP nasceram.</span>
             </a>
-            <a class="start-card" href="/article.html?slug=making-of-blog-eu-ia#o-prompt-inicial">
+            <a class="start-card" href="/blog/making-of-blog-eu-ia/#o-prompt-inicial">
               <span class="start-number">02</span>
               <strong>Veja os prompts</strong>
               <span>Compare pedidos, escolhas de interface e respostas que viraram tela.</span>
@@ -52,7 +69,7 @@
             <a class="start-card" href="/?tag=prompt%20engineering">
               <span class="start-number">03</span>
               <strong>Explore por tema</strong>
-              <span>Use as tags para encontrar artigos por ferramenta, linguagem ou metodo.</span>
+              <span>Use as tags para encontrar artigos por ferramenta, linguagem ou método.</span>
             </a>
           </div>
         </section>
@@ -63,7 +80,7 @@
               <p class="section-kicker">Artigos recentes</p>
               <h2 id="posts-title">Bastidores publicados</h2>
             </div>
-            <p>Relatos curtos, prompts reais e decisoes praticas de construcao.</p>
+            <p>Relatos curtos, prompts reais e decisões práticas de construção.</p>
           </div>
           <div id="filter-state" class="filter-state" hidden></div>
           <div id="posts-list" class="post-list" aria-live="polite">
@@ -72,8 +89,38 @@
         </section>
       </main>
 
-      <footer class="site-footer">
-        Criado com HTML, CSS, TypeScript e um toque de IA.
+      <footer class="site-footer" aria-labelledby="footer-title">
+        <div class="footer-brand">
+          <a id="footer-title" class="footer-logo" href="/">Eu + IA</a>
+          <p>
+            Diário de criação com inteligência artificial, prompts reais e bastidores de produtos
+            digitais.
+          </p>
+        </div>
+        <nav class="footer-nav" aria-label="Navegação do rodapé">
+          <strong>Explorar</strong>
+          <a href="/#comece">Comece por aqui</a>
+          <a href="/#artigos">Artigos</a>
+          <a href="/sobre/">Sobre</a>
+        </nav>
+        <nav class="footer-nav" aria-label="Links externos">
+          <strong>Conectar</strong>
+          <a href="https://github.com/ismaeldevweb-afk/Blog-Eu-IA">GitHub</a>
+          <a href="https://www.linkedin.com/in/ismael-nunes-dos-santos">LinkedIn</a>
+        </nav>
+        <div class="footer-stack" aria-label="Tecnologias usadas">
+          <strong>Feito com</strong>
+          <div>
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>TypeScript</span>
+            <span>Markdown</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 Ismael Nunes dos Santos.</span>
+          <span>Prompts reais, produtos reais.</span>
+        </div>
       </footer>
     </div>
 

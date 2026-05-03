@@ -58,7 +58,7 @@ async function initHome(): Promise<void> {
       .join('');
   } catch (error) {
     postsList.innerHTML = `
-      <p class="empty-state">Nao foi possivel carregar os artigos agora.</p>
+      <p class="empty-state">Não foi possível carregar os artigos agora.</p>
     `;
     console.error(error);
   }

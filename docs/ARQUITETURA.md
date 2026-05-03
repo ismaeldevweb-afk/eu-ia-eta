@@ -4,16 +4,25 @@ Este documento descreve como o blog Eu + IA está organizado e como os arquivos 
 
 ## Visão geral
 
-O projeto é uma aplicação estática multipágina:
+O projeto é uma aplicação estática multipágina com geração SEO no build:
 
 - `index.html`: página inicial.
-- `article.html`: página individual de artigo.
+- `article.html`: fallback legado e rota de desenvolvimento para artigo.
+- `sobre.html`: página Sobre usada no desenvolvimento local.
 - `public/data/posts.json`: índice de posts.
 - `public/posts/*.md`: conteúdo dos artigos.
 - `src/*.ts`: renderização, carregamento e comportamento.
 - `src/styles.css`: design system e estilos globais.
+- `scripts/generate-static-pages.mjs`: gera HTML estático SEO em `dist/`.
 
-O Vite empacota as duas páginas no build final usando a configuração em `vite.config.ts`.
+O Vite empacota as páginas base e, em seguida, o script de geração cria as rotas públicas finais:
+
+```text
+/blog/[slug]/
+/sobre/
+/sitemap.xml
+/robots.txt
+```
 
 ## Entrada da home
 
@@ -41,14 +50,16 @@ src/article.ts
 
 Responsabilidades:
 
-- ler o parâmetro `?slug=`;
+- ler o parâmetro `?slug=` ou a rota `/blog/[slug]/`;
 - buscar metadados no JSON;
 - buscar Markdown em `public/posts`;
 - converter Markdown para HTML com `marked`;
 - gerar IDs automáticos para `h2` e `h3`;
 - transformar blockquotes em blocos de prompt;
 - adicionar botão de copiar prompt;
-- renderizar rodapé com tags.
+- renderizar rodapé com tags e navegação anterior/próximo.
+
+No build de produção, essa mesma lógica continua disponível no cliente, mas o HTML inicial do artigo já é gerado por `scripts/generate-static-pages.mjs`.
 
 ## Componentes HTML
 
@@ -147,14 +158,22 @@ index.html
 Artigo:
 
 ```text
-article.html
-  -> src/article.ts
+/blog/[slug]/index.html
+  -> gerado por scripts/generate-static-pages.mjs
     -> public/data/posts.json
     -> public/posts/[slug].md
     -> marked.parse()
-    -> HTML do artigo
-    -> enhanceArticleHeadings()
-    -> enhancePromptBlocks()
+    -> HTML estático do artigo
+    -> canonical + OG + Twitter Card + JSON-LD BlogPosting
+```
+
+Fallback de desenvolvimento:
+
+```text
+/blog/[slug]/
+  -> vite.config.ts reescreve para article.html
+    -> src/article.ts
+    -> renderização no cliente
 ```
 
 ## Rotas
@@ -174,14 +193,44 @@ Filtro por tag:
 Artigo:
 
 ```text
-/article.html?slug=making-of-blog-eu-ia
+/blog/making-of-blog-eu-ia/
 ```
 
 Seção específica:
 
 ```text
-/article.html?slug=making-of-blog-eu-ia#o-prompt-inicial
+/blog/making-of-blog-eu-ia/#o-prompt-inicial
 ```
+
+Rota legada:
+
+```text
+/article.html?slug=making-of-blog-eu-ia
+```
+
+Essa rota permanece funcional, mas o HTML base tem `noindex, follow`.
+
+## Geração estática e SEO
+
+Arquivo:
+
+```text
+scripts/generate-static-pages.mjs
+```
+
+Responsabilidades:
+
+- ler `public/data/posts.json`;
+- ler cada Markdown em `public/posts`;
+- converter Markdown em HTML;
+- gerar `dist/blog/[slug]/index.html`;
+- gerar `dist/sobre/index.html`;
+- reescrever `dist/index.html` com cards estáticos;
+- gerar `dist/sitemap.xml`;
+- gerar `dist/robots.txt`;
+- injetar canonical, Open Graph, Twitter Card e JSON-LD.
+
+A URL pública é definida por `SITE_URL`. Sem essa variável, o fallback é `https://blog-eu-ia.vercel.app`.
 
 ## Segurança básica
 
@@ -195,9 +244,8 @@ Possíveis evoluções:
 
 - modo escuro;
 - busca local;
-- página Sobre;
-- geração de metadados por post;
 - RSS;
-- sitemap automatizado;
+- páginas estáticas de tag;
+- imagens sociais 1200x630 por artigo;
 - comentários via Giscus;
 - paginação.

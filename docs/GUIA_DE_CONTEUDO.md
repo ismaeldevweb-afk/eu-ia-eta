@@ -179,6 +179,22 @@ Use tags curtas e consistentes:
 
 As tags viram links filtráveis na home.
 
+## URL pública do artigo
+
+Depois do build, cada artigo fica disponível em:
+
+```text
+/blog/SLUG/
+```
+
+Exemplo:
+
+```text
+/blog/como-construi-ismael-dev-studio/
+```
+
+A URL antiga com `article.html?slug=` é apenas fallback legado e não deve ser usada em links públicos.
+
 ## Tempo de leitura
 
 Você pode preencher manualmente:
@@ -197,4 +213,6 @@ Se o campo for removido, o código tem uma função para estimar o tempo a parti
 - As imagens têm `alt`.
 - Os prompts estão em `blockquote`.
 - O build passa com `npm run build`.
+- A página estática existe em `dist/blog/slug-do-artigo/index.html`.
+- O artigo aparece no `dist/sitemap.xml`.
 - Os links internos foram testados.

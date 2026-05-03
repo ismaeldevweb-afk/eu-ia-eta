@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, follow" />
     <meta
       name="description"
-      content="Artigo do blog Eu + IA, com prompts reais e bastidores de criacao."
+      content="Artigo do blog Eu + IA, com prompts reais e bastidores de criação."
     />
     <title>Artigo | Eu + IA</title>
     <link rel="stylesheet" href="/src/styles.css" />
@@ -13,10 +14,10 @@
   <body class="article-page">
     <div class="site-shell">
       <header class="article-topbar">
-        <a class="back-link" href="/" aria-label="Voltar para a pagina inicial do blog">
+        <a class="back-link" href="/" aria-label="Voltar para a página inicial do blog">
           <span aria-hidden="true">←</span> Voltar para o blog
         </a>
-        <a class="brand-link" href="/" aria-label="Ir para a pagina inicial">Eu + IA</a>
+        <a class="brand-link" href="/" aria-label="Ir para a página inicial">Eu + IA</a>
       </header>
 
       <main id="main-content">
@@ -31,6 +32,40 @@
           <footer id="article-footer" class="article-footer"></footer>
         </article>
       </main>
+
+      <footer class="site-footer" aria-labelledby="footer-title">
+        <div class="footer-brand">
+          <a id="footer-title" class="footer-logo" href="/">Eu + IA</a>
+          <p>
+            Diário de criação com inteligência artificial, prompts reais e bastidores de produtos
+            digitais.
+          </p>
+        </div>
+        <nav class="footer-nav" aria-label="Navegação do rodapé">
+          <strong>Explorar</strong>
+          <a href="/#comece">Comece por aqui</a>
+          <a href="/#artigos">Artigos</a>
+          <a href="/sobre/">Sobre</a>
+        </nav>
+        <nav class="footer-nav" aria-label="Links externos">
+          <strong>Conectar</strong>
+          <a href="https://github.com/ismaeldevweb-afk/Blog-Eu-IA">GitHub</a>
+          <a href="https://www.linkedin.com/in/ismael-nunes-dos-santos">LinkedIn</a>
+        </nav>
+        <div class="footer-stack" aria-label="Tecnologias usadas">
+          <strong>Feito com</strong>
+          <div>
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>TypeScript</span>
+            <span>Markdown</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 Ismael Nunes dos Santos.</span>
+          <span>Prompts reais, produtos reais.</span>
+        </div>
+      </footer>
     </div>
 
     <script type="module" src="/src/article.ts"></script>

@@ -2,6 +2,16 @@
 
 O Eu + IA é um projeto estático gerado com Vite. Depois do build, a pasta `dist/` pode ser publicada em qualquer hospedagem de arquivos estáticos.
 
+O build também pré-renderiza as páginas públicas do blog para SEO:
+
+```text
+/
+/sobre/
+/blog/[slug]/
+/sitemap.xml
+/robots.txt
+```
+
 ## Build
 
 ```bash
@@ -56,7 +66,19 @@ Use esse ajuste apenas se a URL final tiver o nome do repositório no caminho.
 
 ## Variáveis de ambiente
 
-O projeto não depende de variáveis de ambiente na versão atual.
+Use `SITE_URL` para informar o domínio público final do blog. Essa variável é usada em canonical, sitemap, Open Graph e JSON-LD.
+
+Exemplo:
+
+```bash
+SITE_URL=https://blog-eu-ia.vercel.app npm run build
+```
+
+Se `SITE_URL` não for definida, o fallback é:
+
+```text
+https://blog-eu-ia.vercel.app
+```
 
 ## Validação antes de publicar
 
@@ -81,9 +103,14 @@ dist
 Depois de publicar, valide:
 
 - home carrega;
-- cards aparecem;
-- artigos abrem por slug;
+- cards aparecem no HTML inicial;
+- artigos abrem por `/blog/[slug]/`;
+- `/sobre/` abre corretamente;
+- `/sitemap.xml` abre corretamente;
+- `/robots.txt` aponta para o sitemap;
 - imagens dos artigos carregam;
 - filtro por tag funciona;
 - botões de copiar prompt funcionam em HTTPS;
-- links externos abrem corretamente.
+- links externos abrem corretamente;
+- canonical aponta para o domínio correto;
+- previews sociais funcionam no LinkedIn/WhatsApp.

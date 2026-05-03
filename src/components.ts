@@ -32,7 +32,7 @@ export function renderPostCard(post: Post, selectedTag?: string, index = 0): str
           ${post.readingMinutes ? `<span>${escapeHtml(metaParts[1])}</span>` : ''}
         </div>
         <h2>
-          <a class="post-title-link" href="/article.html?slug=${encodeURIComponent(post.slug)}">
+          <a class="post-title-link" href="/blog/${encodeURIComponent(post.slug)}/">
             ${escapeHtml(post.title)}
           </a>
         </h2>
@@ -43,7 +43,7 @@ export function renderPostCard(post: Post, selectedTag?: string, index = 0): str
           </div>
           <a
             class="read-link"
-            href="/article.html?slug=${encodeURIComponent(post.slug)}"
+            href="/blog/${encodeURIComponent(post.slug)}/"
             aria-label="Ler artigo ${escapeAttribute(post.title)}"
           >Ler artigo</a>
         </div>

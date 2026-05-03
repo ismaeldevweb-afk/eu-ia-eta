@@ -68,7 +68,7 @@ public/
   posts/*.md
 ```
 
-A home usa `src/main.ts` para buscar a lista de posts em JSON, ordenar por data e renderizar cada card. A página individual usa `src/article.ts` para ler o parâmetro `?slug=`, buscar o Markdown correspondente e convertê-lo para HTML.
+A home usa `src/main.ts` para buscar a lista de posts em JSON, ordenar por data e renderizar cada card durante o desenvolvimento. A página individual usa `src/article.ts` para ler o slug, buscar o Markdown correspondente e convertê-lo para HTML.
 
 Essa separação evita que o conteúdo fique preso no código. O blog pode crescer sem precisar duplicar HTML manualmente para cada artigo.
 
@@ -79,6 +79,37 @@ const produto = {
   conteudo: ['prompts', 'making-of', 'decisoes de design']
 };
 ```
+
+## A virada para SEO técnico
+
+Depois da primeira versão visual, veio uma decisão importante: transformar cada artigo em uma página real, não apenas em uma tela carregada por JavaScript.
+
+Na primeira implementação, a leitura funcionava bem para pessoas, mas a URL tinha este formato:
+
+```text
+/article.html?slug=making-of-blog-eu-ia
+```
+
+Isso é suficiente para um MVP, mas não é o melhor formato para um blog que precisa crescer no Google. A evolução foi criar rotas estáticas e editoriais:
+
+```text
+/blog/making-of-blog-eu-ia/
+/blog/como-construi-ismael-dev-studio/
+```
+
+Para isso, adicionei um script de geração estática no build. Ele lê o JSON de posts, abre cada arquivo Markdown, converte o conteúdo para HTML e grava uma página completa em `dist/blog/[slug]/index.html`.
+
+O mesmo processo também gera:
+
+- canonical por página;
+- Open Graph;
+- Twitter Card;
+- JSON-LD `BlogPosting`;
+- `sitemap.xml`;
+- `robots.txt`;
+- página Sobre em `/sobre/`.
+
+Com isso, o artigo deixa de depender apenas do JavaScript para existir. O conteúdo, o título, a descrição e os dados estruturados já aparecem no HTML inicial.
 
 ## Links do projeto
 
@@ -188,12 +219,13 @@ O blog também virou uma estrutura reaproveitável. O artigo sobre o Ismael Dev 
 
 O MVP já permite publicar artigos reais, documentar prompts e mostrar o processo de criação. As próximas evoluções naturais são:
 
-- página Sobre com um texto mais pessoal;
 - modo escuro;
 - busca por título, resumo e tag;
 - lista global de tags;
+- RSS;
+- imagens sociais específicas para cada artigo;
 - comentários com GitHub Discussions;
 - newsletter;
-- metadados dinâmicos por artigo para SEO.
+- páginas estáticas por tag.
 
 O ponto principal permanece o mesmo: humano acima de tudo, IA como parceira e processo criativo tratado como parte do produto.

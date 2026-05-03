@@ -1,5 +1,6 @@
 import { marked } from 'marked';
 import { renderTagBadge } from './components';
+import { escapeHtml } from './html';
 import { estimateReadingMinutes, formatLongDate, loadPosts } from './posts';
 
 const articleTitle = document.querySelector<HTMLHeadingElement>('#article-title');
@@ -12,12 +13,18 @@ function getSlug(): string | undefined {
   const params = new URLSearchParams(window.location.search);
   const slug = params.get('slug')?.trim();
 
-  return slug || undefined;
+  if (slug) {
+    return slug;
+  }
+
+  const pathMatch = window.location.pathname.match(/\/blog\/([^/]+)\/?$/);
+
+  return pathMatch?.[1] ? decodeURIComponent(pathMatch[1]) : undefined;
 }
 
 function setArticleError(message: string): void {
   if (articleTitle) {
-    articleTitle.textContent = 'Artigo nao encontrado';
+    articleTitle.textContent = 'Artigo não encontrado';
   }
 
   if (articleContent) {
@@ -33,7 +40,7 @@ async function loadMarkdown(slug: string): Promise<string> {
   const response = await fetch(`/posts/${encodeURIComponent(slug)}.md`);
 
   if (!response.ok) {
-    throw new Error('Markdown nao encontrado.');
+    throw new Error('Markdown não encontrado.');
   }
 
   return response.text();
@@ -81,7 +88,7 @@ function enhancePromptBlocks(root: HTMLElement): void {
         }, 1800);
       } catch (error) {
         button.classList.add('is-error');
-        button.setAttribute('aria-label', 'Nao foi possivel copiar');
+        button.setAttribute('aria-label', 'Não foi possível copiar');
         window.setTimeout(() => {
           button.classList.remove('is-error');
           button.setAttribute('aria-label', 'Copiar prompt');
@@ -143,10 +150,13 @@ async function initArticle(): Promise<void> {
     const post = posts.find((item) => item.slug === slug);
 
     if (!post) {
-      setArticleError('Nao encontramos os metadados desse artigo.');
+    setArticleError('Não encontramos os metadados desse artigo.');
       return;
     }
 
+    const postIndex = posts.findIndex((item) => item.slug === slug);
+    const previousPost = postIndex > 0 ? posts[postIndex - 1] : undefined;
+    const nextPost = postIndex >= 0 ? posts[postIndex + 1] : undefined;
     const readingMinutes = post.readingMinutes ?? estimateReadingMinutes(markdown);
     const dateLabel = `${formatLongDate(post.date)} · ~${readingMinutes} min de leitura`;
 
@@ -179,11 +189,23 @@ async function initArticle(): Promise<void> {
         <div class="tag-list is-centered" aria-label="Tags do artigo">
           ${post.tags.map((tag) => renderTagBadge(tag)).join('')}
         </div>
+        <nav class="article-nav" aria-label="Navegação entre artigos">
+          ${
+            previousPost
+              ? `<a href="/blog/${encodeURIComponent(previousPost.slug)}/"><span>Artigo mais recente</span><strong>${escapeHtml(previousPost.title)}</strong></a>`
+              : '<span></span>'
+          }
+          ${
+            nextPost
+              ? `<a href="/blog/${encodeURIComponent(nextPost.slug)}/"><span>Próximo artigo</span><strong>${escapeHtml(nextPost.title)}</strong></a>`
+              : '<span></span>'
+          }
+        </nav>
         <a class="button-link is-secondary" href="/">Voltar para a home</a>
       `;
     }
   } catch (error) {
-    setArticleError('Nao foi possivel carregar este artigo agora.');
+    setArticleError('Não foi possível carregar este artigo agora.');
     console.error(error);
   }
 }
