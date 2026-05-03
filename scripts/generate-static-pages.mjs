@@ -16,7 +16,8 @@ const site = {
   title: 'Eu + IA | Prompts, IA e bastidores de projetos reais',
   description:
     'Um diário de criação onde prompts, inteligência artificial e decisões humanas viram produtos digitais reais.',
-  image: '/images/articles/blog-eu-ia/home-desktop.png'
+  image: '/images/articles/blog-eu-ia/home-desktop.png',
+  imageAlt: 'Página inicial do blog Eu + IA em desktop, com hero editorial e lista de artigos.'
 };
 
 const posts = JSON.parse(readFileSync(postsPath, 'utf8')).sort((a, b) => {
@@ -67,6 +68,10 @@ function absoluteUrl(pathname) {
   return `${siteUrl}${pathname.startsWith('/') ? pathname : `/${pathname}`}`;
 }
 
+function getLocalAssetPath(pathname) {
+  return join(rootDir, 'public', pathname.replace(/^\//, ''));
+}
+
 function blogUrl(slug) {
   return `/blog/${encodeURIComponent(slug)}/`;
 }
@@ -82,6 +87,31 @@ function escapeHtml(value) {
 
 function escapeJson(value) {
   return JSON.stringify(value).replace(/</g, '\\u003c');
+}
+
+function getImageDimensions(pathname) {
+  if (!pathname.startsWith('/')) {
+    return undefined;
+  }
+
+  if (!pathname.toLowerCase().endsWith('.png')) {
+    return undefined;
+  }
+
+  try {
+    const file = readFileSync(getLocalAssetPath(pathname));
+
+    if (file.length < 24 || file.toString('ascii', 1, 4) !== 'PNG') {
+      return undefined;
+    }
+
+    return {
+      width: file.readUInt32BE(16),
+      height: file.readUInt32BE(20)
+    };
+  } catch {
+    return undefined;
+  }
 }
 
 function formatLongDate(date) {
@@ -129,9 +159,22 @@ async function renderMarkdown(markdown) {
   return withPromptBlocks(withHeadingIds(html));
 }
 
-function getArticleImage(markdown) {
-  const match = markdown.match(/<img\s+[^>]*src="([^"]+)"/i);
-  return match?.[1] || site.image;
+function getArticleImageData(markdown, title) {
+  const match = markdown.match(/<img\s+[^>]*src="([^"]+)"[^>]*alt="([^"]*)"/i);
+
+  if (match) {
+    return {
+      src: match[1],
+      alt: match[2] || `Imagem do artigo ${title}.`
+    };
+  }
+
+  const srcOnlyMatch = markdown.match(/<img\s+[^>]*src="([^"]+)"/i);
+
+  return {
+    src: srcOnlyMatch?.[1] || site.image,
+    alt: `Imagem de capa do artigo ${title}.`
+  };
 }
 
 function renderTagBadge(tag, selectedTag) {
@@ -166,9 +209,23 @@ function renderPostCard(post, index) {
   `;
 }
 
-function renderHead({ title, description, canonicalPath, type = 'website', image = site.image, jsonLd }) {
+function renderHead({
+  title,
+  description,
+  canonicalPath,
+  type = 'website',
+  image = site.image,
+  imageAlt = site.imageAlt,
+  jsonLd
+}) {
   const canonical = absoluteUrl(canonicalPath);
   const absoluteImage = absoluteUrl(image);
+  const imageDimensions = getImageDimensions(image);
+  const imageMeta = imageDimensions
+    ? `
+    <meta property="og:image:width" content="${imageDimensions.width}" />
+    <meta property="og:image:height" content="${imageDimensions.height}" />`
+    : '';
 
   return `
     <meta charset="UTF-8" />
@@ -183,10 +240,12 @@ function renderHead({ title, description, canonicalPath, type = 'website', image
     <meta property="og:description" content="${escapeHtml(description)}" />
     <meta property="og:url" content="${canonical}" />
     <meta property="og:image" content="${absoluteImage}" />
+    <meta property="og:image:alt" content="${escapeHtml(imageAlt)}" />${imageMeta}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta name="twitter:description" content="${escapeHtml(description)}" />
     <meta name="twitter:image" content="${absoluteImage}" />
+    <meta name="twitter:image:alt" content="${escapeHtml(imageAlt)}" />
     <script type="application/ld+json">${escapeJson(jsonLd)}</script>
     <link rel="modulepreload" crossorigin href="${assets.shared}">
     <link rel="stylesheet" crossorigin href="${assets.css}">
@@ -294,6 +353,7 @@ ${renderHead({
   description: site.description,
   canonicalPath: '/',
   image: site.image,
+  imageAlt: site.imageAlt,
   jsonLd
 })}
     <script type="module" crossorigin src="${assets.index}"></script>
@@ -378,7 +438,7 @@ async function writeArticles() {
   for (const [index, post] of posts.entries()) {
     const markdown = readFileSync(join(postsDir, `${post.slug}.md`), 'utf8');
     const content = await renderMarkdown(markdown);
-    const image = getArticleImage(markdown);
+    const image = getArticleImageData(markdown, post.title);
     const canonicalPath = blogUrl(post.slug);
     const jsonLd = {
       '@context': 'https://schema.org',
@@ -389,7 +449,7 @@ async function writeArticles() {
       },
       headline: post.title,
       description: post.description,
-      image: [absoluteUrl(image)],
+      image: [absoluteUrl(image.src)],
       datePublished: post.date,
       dateModified: post.date,
       inLanguage: 'pt-BR',
@@ -414,11 +474,12 @@ async function writeArticles() {
 <html lang="pt-BR">
   <head>
 ${renderHead({
-  title: `${post.title} | Eu + IA`,
+  title: `${post.seoTitle || post.title} | Eu + IA`,
   description: post.description,
   canonicalPath,
   type: 'article',
-  image,
+  image: image.src,
+  imageAlt: image.alt,
   jsonLd
 })}
     <meta property="article:published_time" content="${post.date}" />
@@ -481,6 +542,7 @@ ${renderHead({
   description,
   canonicalPath,
   image: site.image,
+  imageAlt: site.imageAlt,
   jsonLd
 })}
   </head>

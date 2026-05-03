@@ -2,6 +2,7 @@
   {
     "slug": "como-construi-ismael-dev-studio",
     "title": "Como construí o Ismael Dev Studio: do planejamento ao deploy",
+    "seoTitle": "Como construí o Ismael Dev Studio",
     "description": "Planejamento, stack, interface, SEO, segurança, testes, prints e deploy do Ismael Dev Studio em um making-of técnico completo.",
     "date": "2026-05-03",
     "tags": ["nextjs", "typescript", "seo", "vercel"],

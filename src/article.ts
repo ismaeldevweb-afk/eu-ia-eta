@@ -160,7 +160,7 @@ async function initArticle(): Promise<void> {
     const readingMinutes = post.readingMinutes ?? estimateReadingMinutes(markdown);
     const dateLabel = `${formatLongDate(post.date)} · ~${readingMinutes} min de leitura`;
 
-    document.title = `${post.title} | Eu + IA`;
+    document.title = post.seoTitle ? `${post.seoTitle} | Eu + IA` : `${post.title} | Eu + IA`;
 
     if (articleTitle) {
       articleTitle.textContent = post.title;
