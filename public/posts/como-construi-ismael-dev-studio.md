@@ -1,161 +1,491 @@
-Quando comecei a construir o Ismael Dev Studio, meu objetivo não era criar apenas mais um site bonito. A ideia era desenvolver uma presença digital profissional, rápida, responsiva e preparada para gerar contatos reais pelo WhatsApp.
+O Ismael Dev Studio nasceu com um objetivo prático: criar uma presença digital profissional para apresentar serviços de criação de sites, landing pages, portfólios digitais e soluções com IA, com foco em gerar contatos reais pelo WhatsApp.
 
-O projeto nasceu como uma vitrine para apresentar serviços de criação de sites, landing pages, portfólios digitais e soluções com IA para pequenos negócios, autônomos e profissionais que precisam transmitir mais confiança na internet.
+Neste artigo, mostro o processo completo de construção do projeto: planejamento, stack, organização do código, criação da interface, SEO, dados estruturados, segurança, testes, prints, diagramas, gráficos e deploy.
 
-Neste artigo, vou mostrar como organizei a construção do projeto, quais tecnologias usei e quais decisões tomei para transformar uma ideia em um site publicado, otimizado e pronto para receber visitantes.
+## Sumário
 
-## A ideia por trás do projeto
+- [Resultado final em prints](#resultado-final-em-prints)
+- [Objetivo do projeto](#objetivo-do-projeto)
+- [Ferramentas utilizadas](#ferramentas-utilizadas)
+- [Arquitetura geral](#arquitetura-geral)
+- [Processo de construção](#processo-de-construção)
+- [Interface e experiência do usuário](#interface-e-experiência-do-usuário)
+- [SEO técnico e conteúdo orgânico](#seo-técnico-e-conteúdo-orgânico)
+- [Performance, segurança e confiabilidade](#performance-segurança-e-confiabilidade)
+- [Testes e validação](#testes-e-validação)
+- [Deploy e monitoramento](#deploy-e-monitoramento)
+- [Aprendizados](#aprendizados)
 
-Antes de escrever código, defini o propósito principal do site: ajudar o visitante a entender rapidamente quem eu sou, o que ofereço e como entrar em contato.
+## Resultado final em prints
 
-Essa decisão guiou toda a estrutura da página. Em vez de criar um site com várias distrações, foquei em uma experiência direta:
+Antes de entrar no processo técnico, vale visualizar o resultado.
 
-- explicar os serviços de forma clara;
-- mostrar exemplos de projetos;
-- apresentar um processo de trabalho simples;
-- exibir planos com preço inicial;
-- facilitar o contato pelo WhatsApp;
-- preparar o site para aparecer melhor no Google.
+### Home em desktop
 
-O ponto central foi tratar o site como uma ferramenta comercial, não apenas como um portfólio visual.
+<figure class="article-figure is-wide">
+  <img src="/images/articles/ismael-dev-studio/print-home-desktop.png" alt="Print da home do Ismael Dev Studio em desktop." loading="lazy" />
+  <figcaption>Home em desktop com proposta de valor, CTA principal e foco em conversão via WhatsApp.</figcaption>
+</figure>
 
-## A stack escolhida
+O primeiro bloco da home comunica rapidamente a proposta: criação de sites profissionais com contato direto pelo WhatsApp. A página já apresenta público-alvo, benefícios principais, chamada para orçamento e visual demonstrativo.
 
-Para desenvolver o projeto, usei uma stack moderna e bem conhecida no desenvolvimento web:
+### Home em mobile
 
-- Next.js 14;
-- React 18;
-- TypeScript;
-- Tailwind CSS;
-- Lucide React;
-- Vitest;
-- Vercel Analytics;
-- Vercel Speed Insights.
+<figure class="article-figure is-wide">
+  <img src="/images/articles/ismael-dev-studio/print-home-mobile.png" alt="Print da home do Ismael Dev Studio em mobile." loading="lazy" />
+  <figcaption>Versão mobile pensada para leitura rápida e contato direto em telas menores.</figcaption>
+</figure>
 
-Escolhi Next.js porque ele oferece uma base muito boa para sites rápidos, com bom suporte a SEO, rotas estáticas, metadados e deploy simples na Vercel.
+No celular, a prioridade foi manter a leitura rápida e os botões principais acessíveis. Como muitos visitantes chegam por redes sociais, bio, indicação ou WhatsApp, a experiência mobile precisava ser tratada como parte central do projeto.
 
-O TypeScript entrou para trazer mais segurança durante o desenvolvimento. Como o conteúdo do site é organizado em objetos tipados, fica mais fácil evoluir serviços, projetos, planos e páginas sem quebrar a estrutura.
+### Página específica para restaurantes
 
-Já o Tailwind CSS foi usado para acelerar a criação da interface, mantendo consistência visual e responsividade em diferentes tamanhos de tela.
+<figure class="article-figure">
+  <img src="/images/articles/ismael-dev-studio/print-pagina-restaurante.png" alt="Print da página de serviço para restaurantes do Ismael Dev Studio." loading="lazy" />
+  <figcaption>Página de serviço criada para trabalhar uma intenção de busca específica e aumentar a cobertura orgânica.</figcaption>
+</figure>
 
-## Organização do projeto
+Além da home, o projeto tem páginas específicas para buscas mais direcionadas. A página de restaurantes trabalha uma intenção de busca própria: restaurantes, pizzarias e negócios de alimentação que querem receber pedidos pelo WhatsApp.
 
-Uma das decisões mais importantes foi separar bem as responsabilidades dentro do código.
+## Objetivo do projeto
 
-Os componentes visuais ficam em:
+O projeto não foi pensado apenas como um portfólio visual. A intenção era construir uma vitrine comercial com clareza, performance e estrutura para crescimento orgânico.
+
+Os objetivos principais foram:
+
+- apresentar o serviço de criação de sites de forma direta;
+- mostrar exemplos de projetos possíveis;
+- explicar o processo de trabalho;
+- exibir planos com valores iniciais;
+- reduzir dúvidas antes do contato;
+- facilitar orçamento pelo WhatsApp;
+- preparar a estrutura para SEO;
+- publicar o site em uma plataforma confiável;
+- acompanhar acesso e performance após o deploy.
+
+A ideia central foi tratar o site como ferramenta de venda. Cada seção tem uma função: explicar, gerar confiança, antecipar dúvidas ou levar o visitante para a próxima ação.
+
+## Ferramentas utilizadas
+
+| Ferramenta | Papel no projeto | Onde aparece |
+| --- | --- | --- |
+| Next.js 14 | Base da aplicação, rotas, metadados e build | `src/app/` |
+| React 18 | Componentização da interface | Componentes em `src/interfaces/components/` |
+| TypeScript | Tipagem de conteúdo, props e configurações | Arquivos `.ts` e `.tsx` |
+| Tailwind CSS | Layout, responsividade e estilo visual | Classes nos componentes |
+| Lucide React | Ícones dos botões, cards e destaques | `lucide-react` |
+| Vercel | Hospedagem, build e publicação | Deploy do site |
+| Vercel Analytics | Monitoramento de visitas | `src/app/layout.tsx` |
+| Vercel Speed Insights | Monitoramento de performance | `src/app/layout.tsx` |
+| Vitest | Testes automatizados | `src/lib/structured-data.test.ts` |
+| next/font/local | Fontes locais otimizadas | `src/app/layout.tsx` |
+| JSON-LD | Dados estruturados para buscadores | `src/lib/structured-data.ts` |
+| WebP | Imagens mais leves | `public/*.webp` |
+| Chrome Headless | Captura dos prints do artigo | `docs/assets/*.png` |
+
+## Stack escolhida
+
+A stack foi escolhida para equilibrar qualidade técnica, velocidade de desenvolvimento e facilidade de publicação.
+
+| Camada | Escolha | Motivo |
+| --- | --- | --- |
+| Framework | Next.js | Bom suporte a SEO, metadados, rotas estáticas e deploy na Vercel |
+| UI | React | Componentização clara e reaproveitável |
+| Linguagem | TypeScript | Mais segurança para evoluir conteúdo e tipos |
+| Estilo | Tailwind CSS | Agilidade visual sem criar CSS solto demais |
+| Ícones | Lucide React | Biblioteca consistente, leve e fácil de usar |
+| Testes | Vitest | Rápido para validar funções e estruturas |
+| Deploy | Vercel | Integração natural com Next.js |
+| Monitoramento | Analytics e Speed Insights | Dados de acesso e performance pós-publicação |
+
+## Arquitetura geral
+
+A organização do projeto foi pensada para separar conteúdo, configuração, componentes e regras técnicas.
 
 ```text
-src/interfaces/components/marketing/
+src/
+  app/
+    layout.tsx
+    page.tsx
+    [slug]/page.tsx
+    globals.css
+    fonts/
+  config/
+    site.ts
+  interfaces/
+    components/
+      marketing/
+    data/
+      site-content.ts
+    types/
+      site.ts
+  lib/
+    structured-data.ts
+    structured-data.test.ts
+public/
+  robots.txt
+  sitemap.xml
+  *.webp
+docs/
+  ARTIGO_COMO_CONSTRUI_O_ISMAEL_DEV_STUDIO.md
+  SEO_REPORT.md
+  assets/
 ```
 
-O conteúdo principal do site fica centralizado em:
+O conteúdo principal fica centralizado em `src/interfaces/data/site-content.ts`. Essa decisão evita espalhar textos de serviços, projetos, planos e FAQ por vários componentes.
+
+As configurações gerais ficam em `src/config/site.ts`, incluindo:
+
+- título do site;
+- descrição SEO;
+- palavras-chave;
+- URL pública;
+- WhatsApp;
+- GitHub;
+- LinkedIn;
+- URL da imagem social.
+
+Os componentes de marketing ficam em `src/interfaces/components/marketing/`. Assim, cada parte da home tem responsabilidade própria: header, hero, serviços, projetos, processo, SEO estratégico, planos, CTA final, rodapé e botão flutuante de WhatsApp.
+
+### Diagrama da arquitetura
+
+```mermaid
+flowchart TD
+  Visitante[Visitante] --> App[Next.js App Router]
+
+  App --> Home["src/app/page.tsx"]
+  App --> Servicos["src/app/[slug]/page.tsx"]
+  App --> Layout["src/app/layout.tsx"]
+
+  Home --> Componentes[Componentes de marketing]
+  Servicos --> Template[ServicePageTemplate]
+
+  Componentes --> Conteudo["src/interfaces/data/site-content.ts"]
+  Template --> Conteudo
+
+  Layout --> Config["src/config/site.ts"]
+  Home --> JsonLd["src/lib/structured-data.ts"]
+  Servicos --> JsonLdServico[JSON-LD por serviço]
+
+  App --> Public[public: imagens, robots e sitemap]
+  Layout --> Analytics[Vercel Analytics]
+  Layout --> Speed[Vercel Speed Insights]
+
+  Componentes --> WhatsApp[Contato via WhatsApp]
+```
+
+## Processo de construção
+
+O desenvolvimento foi dividido em etapas para evitar criar apenas uma página bonita sem estratégia por trás.
+
+### 1. Definição da proposta
+
+Antes do código, defini a mensagem principal:
 
 ```text
-src/interfaces/data/site-content.ts
+Sites profissionais, landing pages e portfólios para pequenos negócios,
+autônomos e profissionais que querem receber contatos pelo WhatsApp.
 ```
 
-E as configurações gerais, como título, descrição, URL pública, WhatsApp, GitHub e LinkedIn, ficam em:
+Essa proposta orientou o restante do projeto. O site precisava responder rapidamente:
+
+- quem é o serviço para;
+- qual problema resolve;
+- quais entregas estão disponíveis;
+- quanto custa para começar;
+- como falar com o desenvolvedor.
+
+### 2. Estrutura comercial da home
+
+A home foi organizada como uma página de conversão, não como uma página institucional genérica.
+
+Fluxo da página:
+
+```mermaid
+flowchart LR
+  Hero[Proposta principal] --> Servicos[Serviços]
+  Servicos --> Projetos[Projetos demonstrativos]
+  Projetos --> Processo[Processo de trabalho]
+  Processo --> SEO[Bloco de SEO estratégico]
+  SEO --> Planos[Planos e valores iniciais]
+  Planos --> Sobre[Sobre e confiança]
+  Sobre --> FAQ[FAQ]
+  FAQ --> CTA[Chamada final]
+  CTA --> WhatsApp[Contato pelo WhatsApp]
+```
+
+Cada bloco responde uma etapa da decisão do visitante. O hero chama atenção, os serviços explicam a oferta, os projetos mostram exemplos, os planos qualificam o cliente e o FAQ reduz dúvidas antes do clique.
+
+### 3. Modelagem do conteúdo
+
+Em vez de colocar textos diretamente nos componentes, o conteúdo foi organizado em objetos tipados.
+
+Exemplos de blocos centralizados:
+
+- `navigationItems`;
+- `services`;
+- `projects`;
+- `steps`;
+- `plans`;
+- `benefits`;
+- `faqs`;
+- `servicePages`.
+
+Essa organização torna o projeto mais fácil de evoluir. Para adicionar um novo serviço ou mudar a descrição de um plano, basta alterar o arquivo de dados, mantendo os componentes mais limpos.
+
+### 4. Criação dos componentes
+
+A interface foi quebrada em componentes menores:
+
+| Componente | Função |
+| --- | --- |
+| `Header` | Navegação principal e CTA de orçamento |
+| `Hero` | Proposta de valor, público-alvo, benefícios e chamada principal |
+| `Services` | Lista de serviços oferecidos |
+| `Projects` | Exemplos de projetos demonstrativos |
+| `Process` | Etapas do atendimento |
+| `StrategicSeo` | Explicação da estrutura de SEO |
+| `AboutAndPlans` | Sobre, diferenciais e planos |
+| `FinalCTA` | Chamada final para contato |
+| `Footer` | Links, informações e navegação |
+| `WhatsAppFloat` | Botão flutuante de contato |
+| `ServicePageTemplate` | Modelo das páginas específicas por serviço |
+
+### 5. Construção visual e responsiva
+
+A interface foi criada com Tailwind CSS. A escolha ajudou a trabalhar responsividade diretamente nos componentes, com classes como:
 
 ```text
-src/config/site.ts
+grid
+gap-10
+px-5
+sm:py-16
+lg:grid-cols-[1.05fr_0.95fr]
+lg:px-8
 ```
 
-Essa organização deixa o projeto mais fácil de manter. Se eu quiser alterar um plano, adicionar um projeto ou mudar uma descrição, não preciso procurar esse texto espalhado por vários componentes.
+O cuidado principal foi garantir que a página funcionasse bem em desktop e mobile. No desktop, existe espaço para apresentar imagem, proposta e benefícios lado a lado. No mobile, a hierarquia muda para priorizar leitura e ação.
 
-## Construindo a página principal
+### 6. Criação das páginas específicas
 
-A home foi pensada como uma página de conversão. Ela começa com uma apresentação direta da proposta de valor e depois conduz o visitante pelas principais informações.
+Além da home, foram criadas páginas para intenções de busca mais específicas:
 
-A estrutura inclui:
+| Rota | Palavra-chave foco |
+| --- | --- |
+| `/criacao-de-sites-profissionais` | criação de sites profissionais |
+| `/landing-page-para-pequenos-negocios` | landing page para pequenos negócios |
+| `/site-para-autonomos` | site para autônomos |
+| `/site-para-restaurantes` | site para restaurantes |
+| `/portfolio-digital` | portfólio digital |
 
-- cabeçalho com navegação;
-- seção hero com chamada principal;
-- serviços oferecidos;
-- projetos demonstrativos;
-- bloco de SEO estratégico;
-- processo de trabalho;
-- planos;
-- seção sobre;
-- FAQ;
-- CTA final;
-- botão flutuante de WhatsApp;
-- rodapé com links importantes.
+Essas páginas usam `src/app/[slug]/page.tsx` e os dados de `servicePages`. O Next.js gera as rotas com `generateStaticParams`, e cada página recebe metadados próprios com `generateMetadata`.
 
-Cada bloco tem uma função. O hero apresenta a promessa. Os serviços explicam o que pode ser contratado. Os projetos ajudam a visualizar possibilidades. O processo reduz incertezas. Os planos ajudam a qualificar o cliente. O FAQ responde objeções comuns antes do contato.
+### 7. Integração com WhatsApp
 
-## Conteúdo pensado para conversão
+O WhatsApp foi tratado como o principal canal de conversão. A URL é montada em `src/config/site.ts`:
 
-Um detalhe importante foi escrever o conteúdo com foco em clareza. O visitante precisa entender rapidamente:
+```text
+https://wa.me/5514991920560?text=...
+```
 
-- que tipo de site pode pedir;
-- para quem o serviço é indicado;
-- quais benefícios vai receber;
-- como funciona o processo;
-- qual é o próximo passo.
+A mensagem já vem pré-preenchida para facilitar a conversa. Isso reduz atrito: o visitante não precisa copiar número, procurar contato ou pensar no que escrever.
 
-Por isso, os textos evitam termos complicados e falam diretamente com pequenos negócios, autônomos, restaurantes, profissionais liberais e pessoas que querem uma presença digital mais profissional.
+### Diagrama do fluxo de conversão
 
-O WhatsApp é o principal canal de contato, então os botões foram pensados para levar o visitante direto para uma conversa.
+```mermaid
+sequenceDiagram
+  participant V as Visitante
+  participant S as Site
+  participant C as Conteúdo
+  participant W as WhatsApp
 
-## SEO desde o começo
+  V->>S: Acessa a página
+  S->>C: Apresenta proposta, serviços e provas visuais
+  C->>V: Reduz dúvidas com processo, planos e FAQ
+  V->>S: Clica em solicitar orçamento
+  S->>W: Abre conversa com mensagem pronta
+  W->>V: Visitante inicia contato direto
+```
 
-SEO não ficou para depois. Desde a base do projeto, configurei elementos importantes para ajudar o site a ser entendido por buscadores.
+## Interface e experiência do usuário
 
-Entre os pontos implementados estão:
+A experiência foi desenhada para ser direta. O visitante não deve precisar interpretar a página. Ele precisa entender rapidamente a oferta e saber onde clicar.
 
-- title e meta description;
-- canonical;
+### Decisões de UX
+
+| Decisão | Motivo |
+| --- | --- |
+| CTA no header | Facilita contato sem depender de rolagem |
+| Hero com frase objetiva | Explica a proposta em poucos segundos |
+| Benefícios curtos | Ajuda a escanear valor rapidamente |
+| Projetos demonstrativos | Dá referências visuais concretas |
+| Planos com preço inicial | Qualifica o contato antes do orçamento |
+| FAQ | Remove dúvidas comuns |
+| WhatsApp flutuante | Mantém o canal de ação sempre acessível |
+
+### Hierarquia visual
+
+A hierarquia segue a ordem:
+
+1. promessa principal;
+2. público atendido;
+3. chamada para orçamento;
+4. benefícios rápidos;
+5. serviços e exemplos;
+6. processo e planos;
+7. FAQ e CTA final.
+
+Essa ordem evita começar pela tecnologia. O visitante não compra Next.js ou TypeScript. Ele procura presença profissional, confiança e contato com clientes.
+
+## SEO técnico e conteúdo orgânico
+
+SEO foi planejado desde o começo. O projeto inclui:
+
+- `title`;
+- `meta description`;
+- `canonical`;
 - Open Graph;
 - Twitter Card;
-- sitemap.xml;
-- robots.txt;
-- idioma em `pt-BR`;
+- `robots.txt`;
+- `sitemap.xml`;
+- idioma `pt-BR`;
 - imagens com texto alternativo;
-- conteúdo estruturado por intenção de busca;
+- conteúdo organizado por intenção de busca;
 - dados estruturados em JSON-LD.
 
-O site também conta com schemas como `ProfessionalService`, `WebSite`, `FAQPage`, `Offer` e `Service`. Esses dados estruturados ajudam mecanismos de busca a compreenderem melhor o tipo de negócio, os serviços oferecidos, os planos e as perguntas frequentes.
+### Dados estruturados
 
-## Páginas específicas para crescimento orgânico
+Os dados estruturados ficam em `src/lib/structured-data.ts`. A home gera schemas de:
 
-Além da home, criei páginas focadas em buscas mais específicas:
+- `ProfessionalService`;
+- `WebSite`;
+- `FAQPage`;
+- `Offer` dentro do serviço profissional.
 
-- `/criacao-de-sites-profissionais`;
-- `/landing-page-para-pequenos-negocios`;
-- `/site-para-autonomos`;
-- `/site-para-restaurantes`;
-- `/portfolio-digital`.
+As páginas específicas geram:
 
-Cada página tem título, descrição, palavras-chave, canonical, Open Graph e dados estruturados próprios.
+- `Service`;
+- `FAQPage`.
 
-Essa estratégia permite que o site não dependa apenas da página inicial. Cada rota pode trabalhar uma intenção de busca diferente, como criação de sites profissionais, landing page para pequenos negócios ou site para restaurantes.
+Isso ajuda mecanismos de busca a entenderem melhor o negócio, os serviços, planos, perguntas frequentes e dados de contato.
 
-## Performance e experiência
+### Diagrama do SEO
 
-Como o projeto foi feito com Next.js, aproveitei recursos importantes para performance e experiência:
+```mermaid
+flowchart TD
+  Conteudo[Conteúdo visível] --> Keywords[Palavras-chave por intenção]
+  Conteudo --> Headings[Títulos e hierarquia]
+  Conteudo --> Links[Links internos]
 
-- páginas estáticas;
-- imagens em formatos modernos, como WebP;
-- fontes locais com carregamento otimizado;
-- layout responsivo;
+  Metadata[Metadados do Next.js] --> Title[Title]
+  Metadata --> Description[Meta description]
+  Metadata --> Canonical[Canonical]
+  Metadata --> OpenGraph[Open Graph e Twitter Card]
+
+  JsonLd[JSON-LD] --> ProfessionalService[ProfessionalService]
+  JsonLd --> FAQPage[FAQPage]
+  JsonLd --> Service[Service]
+  JsonLd --> Offer[Offer]
+
+  Public[Arquivos públicos] --> Sitemap[sitemap.xml]
+  Public --> Robots[robots.txt]
+
+  Keywords --> Google[Buscadores]
+  Metadata --> Google
+  JsonLd --> Google
+  Public --> Google
+```
+
+### Gráfico de foco do esforço
+
+Este gráfico representa uma divisão aproximada do esforço de construção. Não é uma métrica automática; é uma leitura prática do peso de cada frente no projeto.
+
+```mermaid
+pie showData
+  title Distribuição aproximada do esforço no projeto
+  "Conteúdo e estratégia" : 25
+  "Interface e responsividade" : 25
+  "SEO técnico" : 20
+  "Performance" : 10
+  "Segurança" : 10
+  "Testes e validação" : 10
+```
+
+### Pontos avaliados no relatório de SEO
+
+O projeto também possui um relatório técnico em `docs/SEO_REPORT.md`. A avaliação estimada foi:
+
+| Área | Nota | Leitura |
+| --- | --- | --- |
+| SEO técnico | 8.5/10 | Base forte |
+| Conteúdo e intenção de busca | 8/10 | Boa cobertura inicial |
+| Dados estruturados | 8/10 | Estrutura forte |
+| Performance e experiência | 8/10 | Boa base |
+| Conversão | 8.5/10 | CTAs e WhatsApp bem integrados |
+| Autoridade e crescimento orgânico | 5/10 | Ainda depende de domínio, conteúdo e links externos |
+
+## Performance, segurança e confiabilidade
+
+### Performance
+
+As principais decisões de performance foram:
+
+- uso de Next.js;
+- imagens em WebP;
+- fontes locais com `next/font/local`;
+- `display: swap` nas fontes;
+- componentes estáticos sempre que possível;
 - integração com Vercel Speed Insights;
-- integração com Vercel Analytics.
+- CSS utilitário com Tailwind;
+- redução de dependências visuais pesadas.
 
-Também usei fontes locais para reduzir dependências externas e melhorar a previsibilidade do carregamento.
+As fontes ficam em:
 
-O objetivo foi garantir que o site funcionasse bem tanto no desktop quanto no celular, já que boa parte dos visitantes provavelmente chega por links compartilhados em redes sociais, bio ou WhatsApp.
+```text
+src/app/fonts/
+```
 
-## Segurança e confiabilidade
+O carregamento é configurado em:
 
-Além da interface e do SEO, também adicionei cuidados técnicos para transmitir mais confiabilidade.
+```text
+src/app/layout.tsx
+```
 
-O projeto conta com redirecionamento para HTTPS em produção e configurações pensadas para publicação na Vercel. Também foram avaliados headers importantes, como políticas de segurança, proteção contra carregamento indevido em iframe e controle de permissões.
+### Segurança
 
-Esses detalhes nem sempre aparecem visualmente, mas fazem diferença na qualidade técnica do projeto.
+O projeto inclui headers configurados em `next.config.mjs`, como:
+
+- `Content-Security-Policy`;
+- `Strict-Transport-Security`;
+- `X-Content-Type-Options`;
+- `X-Frame-Options`;
+- `Referrer-Policy`;
+- `Permissions-Policy`;
+- `Cross-Origin-Opener-Policy`;
+- `Cross-Origin-Resource-Policy`.
+
+Também existe um `middleware.ts` para redirecionar requisições de produção para HTTPS quando necessário.
+
+Esses detalhes não aparecem visualmente na página, mas aumentam a confiabilidade técnica do projeto.
+
+### Diagrama de segurança e publicação
+
+```mermaid
+flowchart LR
+  Browser[Navegador] --> Request[Requisição]
+  Request --> Middleware[middleware.ts]
+  Middleware --> HTTPS{Produção sem HTTPS?}
+  HTTPS -->|Sim| Redirect[Redirect 308 para HTTPS]
+  HTTPS -->|Não| Next[Next.js]
+  Next --> Headers[Headers de segurança]
+  Headers --> Page[Página entregue]
+```
 
 ## Testes e validação
 
-Para manter a qualidade, o projeto inclui scripts de validação:
+O projeto inclui validações para reduzir risco antes do deploy.
+
+Comandos principais:
 
 ```bash
 npm run typecheck
@@ -163,42 +493,146 @@ npm test
 npm run build
 ```
 
-O TypeScript ajuda a encontrar problemas de tipagem. O Vitest permite testar partes importantes da lógica, como dados estruturados. E o build confirma se o projeto está pronto para produção.
+O papel de cada comando:
 
-Essa etapa é essencial porque um site profissional precisa ser confiável também por baixo da interface.
+| Comando | O que valida |
+| --- | --- |
+| `npm run typecheck` | Tipagem TypeScript sem gerar arquivos |
+| `npm test` | Testes automatizados com Vitest |
+| `npm run build` | Build de produção do Next.js |
 
-## Deploy na Vercel
+Os testes atuais validam principalmente os dados estruturados:
 
-Depois da implementação, publiquei o projeto na Vercel.
+- schema `ProfessionalService`;
+- schema `WebSite`;
+- schema `FAQPage`;
+- presença de ofertas;
+- URL canônica;
+- perguntas e respostas estruturadas.
 
-A Vercel combina muito bem com Next.js porque simplifica o processo de build, deploy e monitoramento. Com ela, consigo publicar alterações rapidamente e acompanhar dados de performance e acesso.
+Isso é importante porque JSON-LD costuma ser fácil de quebrar silenciosamente. Um campo removido ou mal montado pode não aparecer na interface, mas afetar SEO técnico.
 
-A URL pública do projeto é:
+## Como os prints foram gerados
+
+Os prints usados neste artigo foram capturados com o site rodando localmente.
+
+Servidor local:
+
+```bash
+npm run dev
+```
+
+Captura desktop:
+
+```bash
+google-chrome --headless=new --disable-gpu --hide-scrollbars \
+  --window-size=1440,1100 \
+  --screenshot=docs/assets/print-home-desktop.png \
+  http://127.0.0.1:3000
+```
+
+Captura mobile:
+
+```bash
+google-chrome --headless=new --disable-gpu --hide-scrollbars \
+  --window-size=390,1200 \
+  --screenshot=docs/assets/print-home-mobile.png \
+  http://127.0.0.1:3000
+```
+
+Captura da página de restaurantes:
+
+```bash
+google-chrome --headless=new --disable-gpu --hide-scrollbars \
+  --window-size=1440,1100 \
+  --screenshot=docs/assets/print-pagina-restaurante.png \
+  http://127.0.0.1:3000/site-para-restaurantes
+```
+
+Esses prints ajudam a documentar o resultado real da interface, não apenas a intenção do projeto.
+
+## Deploy e monitoramento
+
+O deploy foi feito na Vercel, que combina bem com Next.js por simplificar build, publicação e monitoramento.
+
+URL pública:
 
 ```text
 https://ismaeldevstudio.vercel.app
 ```
 
+### Pipeline do projeto
+
+```mermaid
+flowchart TD
+  Codigo[Código local] --> Validacao[Typecheck, testes e build]
+  Validacao --> Repo[Repositório]
+  Repo --> Vercel[Vercel]
+  Vercel --> Build[Build de produção]
+  Build --> Deploy[Deploy publicado]
+  Deploy --> Analytics[Vercel Analytics]
+  Deploy --> Speed[Vercel Speed Insights]
+  Deploy --> Search[Search Console e evolução de SEO]
+```
+
+Após o deploy, as próximas frentes de monitoramento são:
+
+- visitas no Vercel Analytics;
+- performance no Vercel Speed Insights;
+- indexação no Google Search Console;
+- cliques e impressões por página;
+- páginas com boa impressão e baixo CTR;
+- oportunidades para novas páginas por nicho.
+
+## Linha do tempo do desenvolvimento
+
+```mermaid
+gantt
+  title Linha do tempo do projeto
+  dateFormat  YYYY-MM-DD
+  section Estratégia
+  Definição da proposta           :done, a1, 2026-04-25, 1d
+  Organização das seções          :done, a2, 2026-04-26, 1d
+  section Desenvolvimento
+  Componentes da home             :done, b1, 2026-04-27, 2d
+  Páginas específicas             :done, b2, 2026-04-29, 1d
+  SEO e dados estruturados        :done, b3, 2026-04-30, 1d
+  section Validação
+  Testes, build e relatório SEO   :done, c1, 2026-05-01, 1d
+  Prints e documentação           :done, c2, 2026-05-03, 1d
+```
+
+As datas acima funcionam como registro documental do processo. O ponto principal é mostrar a sequência: estratégia primeiro, desenvolvimento depois, validação antes da publicação contínua.
+
 ## O que aprendi construindo este projeto
 
-Construir o Ismael Dev Studio reforçou uma ideia importante: um bom site não é feito apenas de visual. Ele precisa unir estratégia, conteúdo, performance, SEO, confiança e caminhos claros para conversão.
+Construir o Ismael Dev Studio reforçou uma ideia importante: um site profissional não depende só de visual. Ele precisa unir mensagem, estrutura, performance, SEO, confiança e conversão.
 
-Durante o desenvolvimento, percebi que a parte técnica só faz sentido quando serve a um objetivo real. Neste caso, o objetivo era criar uma vitrine digital capaz de apresentar serviços com clareza e transformar visitantes em contatos.
+As decisões técnicas só fizeram sentido porque serviam a um objetivo comercial claro:
 
-Por isso, cada decisão teve uma intenção:
-
-- Next.js para performance e SEO;
-- TypeScript para segurança;
+- Next.js para performance, rotas e SEO;
+- TypeScript para segurança e manutenção;
 - Tailwind CSS para agilidade visual;
-- conteúdo centralizado para manutenção;
+- conteúdo centralizado para facilitar evolução;
 - páginas específicas para crescimento orgânico;
-- WhatsApp integrado para conversão;
-- Vercel para deploy rápido e monitoramento.
+- WhatsApp integrado para conversão direta;
+- Vercel para deploy e monitoramento;
+- testes para proteger partes sensíveis, como JSON-LD.
+
+## Próximos passos
+
+O projeto já tem uma base sólida, mas pode evoluir em frentes importantes:
+
+- configurar um e-mail real em `NEXT_PUBLIC_CONTACT_EMAIL`;
+- cadastrar o domínio no Google Search Console;
+- enviar o sitemap;
+- criar páginas para novos nichos, como lojas, advogados, psicólogos e prestadores locais;
+- adicionar depoimentos e provas sociais reais;
+- criar estudos de caso com problema, solução e resultado;
+- acompanhar dados de acesso para melhorar conteúdo e CTAs.
 
 ## Conclusão
 
-O Ismael Dev Studio foi construído para ser mais do que um site institucional. Ele é uma base profissional para divulgar serviços, mostrar projetos, gerar confiança e facilitar o contato com clientes.
+O Ismael Dev Studio foi construído como uma vitrine profissional para gerar confiança e facilitar contato. A página combina estratégia comercial, interface responsiva, SEO técnico, dados estruturados, segurança, performance e deploy em uma base simples de manter.
 
-Esse projeto mostra como tecnologia e estratégia precisam caminhar juntas. O código sustenta a experiência, mas é a clareza da mensagem que ajuda o visitante a tomar uma decisão.
-
-No fim, a melhor página não é apenas a mais bonita. É aquela que carrega rápido, comunica bem, funciona no celular, aparece nos buscadores e leva o visitante para a ação certa.
+O resultado é um site que não depende apenas de aparência. Ele comunica uma oferta, mostra exemplos, orienta o visitante, melhora a presença no Google e leva a pessoa para a ação certa: iniciar uma conversa pelo WhatsApp.

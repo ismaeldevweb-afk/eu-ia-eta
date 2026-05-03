@@ -1,11 +1,11 @@
 [
   {
     "slug": "como-construi-ismael-dev-studio",
-    "title": "Como construí o Ismael Dev Studio: do código à presença profissional online",
-    "description": "O making-of de uma vitrine profissional feita com Next.js, SEO, performance e foco em conversão pelo WhatsApp.",
-    "date": "2026-05-02",
+    "title": "Como construí o Ismael Dev Studio: do planejamento ao deploy",
+    "description": "Planejamento, stack, interface, SEO, segurança, testes, prints e deploy do Ismael Dev Studio em um making-of técnico completo.",
+    "date": "2026-05-03",
     "tags": ["nextjs", "typescript", "seo", "vercel"],
-    "readingMinutes": 7
+    "readingMinutes": 14
   },
   {
     "slug": "making-of-blog-eu-ia",
