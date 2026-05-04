@@ -6,7 +6,7 @@ const rootDir = process.cwd();
 const distDir = join(rootDir, 'dist');
 const postsPath = join(rootDir, 'public/data/posts.json');
 const postsDir = join(rootDir, 'public/posts');
-const siteUrl = normalizeSiteUrl(process.env.SITE_URL || 'https://blog-eu-ia.vercel.app');
+const siteUrl = normalizeSiteUrl(process.env.SITE_URL || 'https://eu-ia-eta.vercel.app');
 const author = {
   name: 'Ismael Nunes dos Santos',
   url: 'https://www.linkedin.com/in/ismael-nunes-dos-santos'
@@ -578,21 +578,39 @@ ${renderHead({
 
 function writeSitemap() {
   const urls = [
-    { loc: absoluteUrl('/'), lastmod: new Date().toISOString().slice(0, 10) },
-    { loc: absoluteUrl('/sobre/'), lastmod: new Date().toISOString().slice(0, 10) },
-    ...posts.map((post) => ({
-      loc: absoluteUrl(blogUrl(post.slug)),
-      lastmod: post.date
-    }))
+    { loc: absoluteUrl('/'), lastmod: '2026-05-04T16:23:54+00:00', priority: '1.00' },
+    { loc: absoluteUrl('/sobre/'), lastmod: '2026-05-04T16:23:55+00:00', priority: '0.80' },
+    {
+      loc: absoluteUrl('/blog/making-of-blog-eu-ia/'),
+      lastmod: '2026-05-04T16:23:55+00:00',
+      priority: '0.80'
+    },
+    {
+      loc: absoluteUrl('/?tag=prompt%20engineering'),
+      lastmod: '2026-05-04T16:23:54+00:00',
+      priority: '0.80'
+    },
+    {
+      loc: absoluteUrl('/blog/como-construi-ismael-dev-studio/'),
+      lastmod: '2026-05-04T16:23:55+00:00',
+      priority: '0.80'
+    },
+    { loc: absoluteUrl('/?tag=nextjs'), lastmod: '2026-05-04T16:23:54+00:00', priority: '0.80' },
+    { loc: absoluteUrl('/?tag=typescript'), lastmod: '2026-05-04T16:23:54+00:00', priority: '0.80' },
+    { loc: absoluteUrl('/?tag=seo'), lastmod: '2026-05-04T16:23:54+00:00', priority: '0.80' },
+    { loc: absoluteUrl('/?tag=vercel'), lastmod: '2026-05-04T16:23:54+00:00', priority: '0.80' },
+    { loc: absoluteUrl('/?tag=html'), lastmod: '2026-05-04T16:23:54+00:00', priority: '0.80' },
+    { loc: absoluteUrl('/?tag=css'), lastmod: '2026-05-04T16:23:54+00:00', priority: '0.80' }
   ];
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  const xml = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <!--  created with Free Online Sitemap Generator www.xml-sitemaps.com  -->
 ${urls
   .map(
     (url) => `  <url>
     <loc>${url.loc}</loc>
     <lastmod>${url.lastmod}</lastmod>
+    <priority>${url.priority}</priority>
   </url>`
   )
   .join('\n')}
