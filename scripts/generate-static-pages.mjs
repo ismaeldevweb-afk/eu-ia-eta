@@ -576,15 +576,12 @@ ${renderHead({
 }
 
 function writeSitemap() {
-  const buildDate = new Date().toISOString().slice(0, 10);
+  const lastmod = '2026-05-05T14:16:33-03:00';
   const urls = [
-    { loc: absoluteUrl('/'), lastmod: buildDate, priority: '1.00' },
-    { loc: absoluteUrl('/sobre/'), lastmod: buildDate, priority: '0.80' },
-    ...posts.map((post) => ({
-      loc: absoluteUrl(blogUrl(post.slug)),
-      lastmod: post.date,
-      priority: '0.80'
-    }))
+    { loc: siteUrl, lastmod, priority: '1.0' },
+    { loc: absoluteUrl('/blog/como-construi-ismael-dev-studio/'), lastmod, priority: '0.6' },
+    { loc: absoluteUrl('/blog/making-of-blog-eu-ia/'), lastmod, priority: '0.6' },
+    { loc: absoluteUrl('/sobre/'), lastmod, priority: '0.8' }
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
