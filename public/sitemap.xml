@@ -1,19 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <!--  created with Free Online Sitemap Generator www.xml-sitemaps.com  -->
   <url>
     <loc>https://eu-ia-eta.vercel.app/</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-04T16:23:54+00:00</lastmod>
+    <priority>1.00</priority>
   </url>
   <url>
     <loc>https://eu-ia-eta.vercel.app/sobre/</loc>
-    <lastmod>2026-05-05</lastmod>
-  </url>
-  <url>
-    <loc>https://eu-ia-eta.vercel.app/blog/como-construi-ismael-dev-studio/</loc>
-    <lastmod>2026-05-03</lastmod>
+    <lastmod>2026-05-04T16:23:55+00:00</lastmod>
+    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://eu-ia-eta.vercel.app/blog/making-of-blog-eu-ia/</loc>
-    <lastmod>2026-04-28</lastmod>
+    <lastmod>2026-05-04T16:23:55+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://eu-ia-eta.vercel.app/?tag=prompt%20engineering</loc>
+    <lastmod>2026-05-04T16:23:54+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://eu-ia-eta.vercel.app/blog/como-construi-ismael-dev-studio/</loc>
+    <lastmod>2026-05-04T16:23:55+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://eu-ia-eta.vercel.app/?tag=nextjs</loc>
+    <lastmod>2026-05-04T16:23:54+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://eu-ia-eta.vercel.app/?tag=typescript</loc>
+    <lastmod>2026-05-04T16:23:54+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://eu-ia-eta.vercel.app/?tag=seo</loc>
+    <lastmod>2026-05-04T16:23:54+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://eu-ia-eta.vercel.app/?tag=vercel</loc>
+    <lastmod>2026-05-04T16:23:54+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://eu-ia-eta.vercel.app/?tag=html</loc>
+    <lastmod>2026-05-04T16:23:54+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://eu-ia-eta.vercel.app/?tag=css</loc>
+    <lastmod>2026-05-04T16:23:54+00:00</lastmod>
+    <priority>0.80</priority>
   </url>
 </urlset>
