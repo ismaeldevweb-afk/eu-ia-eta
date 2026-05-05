@@ -109,13 +109,13 @@ Status: **bom**
 Cada página gerada possui canonical absoluto:
 
 ```html
-<link rel="canonical" href="https://blog-eu-ia.vercel.app/blog/making-of-blog-eu-ia/" />
+<link rel="canonical" href="https://eu-ia-eta.vercel.app/blog/making-of-blog-eu-ia/" />
 ```
 
 Risco atual: o domínio é definido por `SITE_URL`, com fallback para:
 
 ```text
-https://blog-eu-ia.vercel.app
+https://eu-ia-eta.vercel.app
 ```
 
 Se a URL pública real for outra, canonical, sitemap, Open Graph e JSON-LD ficarão apontando para o domínio errado.
@@ -135,10 +135,10 @@ dist/sitemap.xml
 Conteúdo atual:
 
 ```text
-https://blog-eu-ia.vercel.app/
-https://blog-eu-ia.vercel.app/sobre/
-https://blog-eu-ia.vercel.app/blog/como-construi-ismael-dev-studio/
-https://blog-eu-ia.vercel.app/blog/making-of-blog-eu-ia/
+https://eu-ia-eta.vercel.app/
+https://eu-ia-eta.vercel.app/sobre/
+https://eu-ia-eta.vercel.app/blog/como-construi-ismael-dev-studio/
+https://eu-ia-eta.vercel.app/blog/making-of-blog-eu-ia/
 ```
 
 O sitemap inclui `lastmod`, o que é adequado para páginas estáticas.
@@ -153,7 +153,7 @@ O build gera:
 User-agent: *
 Allow: /
 
-Sitemap: https://blog-eu-ia.vercel.app/sitemap.xml
+Sitemap: https://eu-ia-eta.vercel.app/sitemap.xml
 ```
 
 Isso está correto para um blog público.

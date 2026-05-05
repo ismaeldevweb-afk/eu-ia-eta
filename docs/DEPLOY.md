@@ -12,7 +12,7 @@ O build também pré-renderiza as páginas públicas do blog para SEO:
 /robots.txt
 ```
 
-O sitemap e o robots são mantidos manualmente em `public/sitemap.xml` e `public/robots.txt`, e copiados para `dist/` pelo Vite durante o build.
+O sitemap é gerado automaticamente em `dist/sitemap.xml` pelo script de build. O `robots.txt` é mantido manualmente em `public/robots.txt` e copiado para `dist/` pelo Vite.
 
 ## Build
 
@@ -73,13 +73,13 @@ Use `SITE_URL` para informar o domínio público final do blog. Essa variável �
 Exemplo:
 
 ```bash
-SITE_URL=https://blog-eu-ia.vercel.app npm run build
+SITE_URL=https://eu-ia-eta.vercel.app npm run build
 ```
 
 Se `SITE_URL` não for definida, o fallback é:
 
 ```text
-https://blog-eu-ia.vercel.app
+https://eu-ia-eta.vercel.app
 ```
 
 ## Validação antes de publicar

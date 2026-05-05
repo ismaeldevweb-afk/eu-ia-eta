@@ -8,11 +8,11 @@ Neste artigo, mostro o processo completo de construção do projeto: planejament
 - [Objetivo do projeto](#objetivo-do-projeto)
 - [Ferramentas utilizadas](#ferramentas-utilizadas)
 - [Arquitetura geral](#arquitetura-geral)
-- [Processo de construção](#processo-de-construção)
-- [Interface e experiência do usuário](#interface-e-experiência-do-usuário)
-- [SEO técnico e conteúdo orgânico](#seo-técnico-e-conteúdo-orgânico)
-- [Performance, segurança e confiabilidade](#performance-segurança-e-confiabilidade)
-- [Testes e validação](#testes-e-validação)
+- [Processo de construção](#processo-de-construcao)
+- [Interface e experiência do usuário](#interface-e-experiencia-do-usuario)
+- [SEO técnico e conteúdo orgânico](#seo-tecnico-e-conteudo-organico)
+- [Performance, segurança e confiabilidade](#performance-seguranca-e-confiabilidade)
+- [Testes e validação](#testes-e-validacao)
 - [Deploy e monitoramento](#deploy-e-monitoramento)
 - [Aprendizados](#aprendizados)
 
@@ -128,7 +128,7 @@ public/
   *.webp
 docs/
   ARTIGO_COMO_CONSTRUI_O_ISMAEL_DEV_STUDIO.md
-  SEO_REPORT.md
+  SEO_ANALISE.md
   assets/
 ```
 
@@ -413,7 +413,7 @@ pie showData
 
 ### Pontos avaliados no relatório de SEO
 
-O projeto também possui um relatório técnico em `docs/SEO_REPORT.md`. A avaliação estimada foi:
+O projeto também possui um relatório técnico em `docs/SEO_ANALISE.md`. A avaliação estimada foi:
 
 | Área | Nota | Leitura |
 | --- | --- | --- |
@@ -604,7 +604,7 @@ gantt
 
 As datas acima funcionam como registro documental do processo. O ponto principal é mostrar a sequência: estratégia primeiro, desenvolvimento depois, validação antes da publicação contínua.
 
-## O que aprendi construindo este projeto
+## Aprendizados
 
 Construir o Ismael Dev Studio reforçou uma ideia importante: um site profissional não depende só de visual. Ele precisa unir mensagem, estrutura, performance, SEO, confiança e conversão.
 

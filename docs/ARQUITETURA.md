@@ -226,17 +226,17 @@ Responsabilidades:
 - gerar `dist/blog/[slug]/index.html`;
 - gerar `dist/sobre/index.html`;
 - reescrever `dist/index.html` com cards estáticos;
-- copiar `public/sitemap.xml` para `dist/sitemap.xml`;
+- gerar `dist/sitemap.xml` a partir de `public/data/posts.json`;
 - copiar `public/robots.txt` para `dist/robots.txt`;
 - injetar canonical, Open Graph, Twitter Card e JSON-LD.
 
-A URL pública é definida por `SITE_URL`. Sem essa variável, o fallback é `https://blog-eu-ia.vercel.app`.
+A URL pública é definida por `SITE_URL`. Sem essa variável, o fallback é `https://eu-ia-eta.vercel.app`.
 
 ## Segurança básica
 
 Os dados vindos de `posts.json` são escapados antes de entrarem em strings HTML.
 
-O Markdown é convertido com `marked`. Como os arquivos Markdown fazem parte do próprio repositório, o risco é controlado pelo fluxo editorial. Se o blog passar a aceitar conteúdo externo, será necessário adicionar sanitização HTML.
+O Markdown é convertido com `marked`. Hoje o conteúdo Markdown é confiável porque vem do próprio repositório. Se futuramente posts forem criados por usuários, CMS externo ou painel administrativo, será obrigatório sanitizar o HTML antes de renderizar.
 
 ## Pontos de extensão
 
