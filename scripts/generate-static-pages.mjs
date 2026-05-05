@@ -33,7 +33,6 @@ rmSync(join(distDir, 'sobre.html'), { force: true });
 writeHome();
 writeAbout();
 await writeArticles();
-writeSitemap();
 writeRobots();
 
 function normalizeSiteUrl(value) {
@@ -574,32 +573,6 @@ ${renderHead({
   </body>
 </html>`
   );
-}
-
-function writeSitemap() {
-  const urls = [
-    { loc: absoluteUrl('/'), lastmod: new Date().toISOString().slice(0, 10) },
-    { loc: absoluteUrl('/sobre/'), lastmod: new Date().toISOString().slice(0, 10) },
-    ...posts.map((post) => ({
-      loc: absoluteUrl(blogUrl(post.slug)),
-      lastmod: post.date
-    }))
-  ];
-
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-${urls
-  .map(
-    (url) => `  <url>
-    <loc>${url.loc}</loc>
-    <lastmod>${url.lastmod}</lastmod>
-  </url>`
-  )
-  .join('\n')}
-</urlset>
-`;
-
-  writeFileSync(join(distDir, 'sitemap.xml'), xml);
 }
 
 function writeRobots() {

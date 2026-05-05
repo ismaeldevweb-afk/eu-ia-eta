@@ -226,7 +226,7 @@ Responsabilidades:
 - gerar `dist/blog/[slug]/index.html`;
 - gerar `dist/sobre/index.html`;
 - reescrever `dist/index.html` com cards estáticos;
-- gerar `dist/sitemap.xml`;
+- copiar `public/sitemap.xml` para `dist/sitemap.xml`;
 - gerar `dist/robots.txt`;
 - injetar canonical, Open Graph, Twitter Card e JSON-LD.
 
