@@ -227,7 +227,7 @@ Responsabilidades:
 - gerar `dist/sobre/index.html`;
 - reescrever `dist/index.html` com cards estáticos;
 - copiar `public/sitemap.xml` para `dist/sitemap.xml`;
-- gerar `dist/robots.txt`;
+- copiar `public/robots.txt` para `dist/robots.txt`;
 - injetar canonical, Open Graph, Twitter Card e JSON-LD.
 
 A URL pública é definida por `SITE_URL`. Sem essa variável, o fallback é `https://blog-eu-ia.vercel.app`.

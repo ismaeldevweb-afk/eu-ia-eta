@@ -33,7 +33,6 @@ rmSync(join(distDir, 'sobre.html'), { force: true });
 writeHome();
 writeAbout();
 await writeArticles();
-writeRobots();
 
 function normalizeSiteUrl(value) {
   return value.replace(/\/+$/, '');
@@ -572,16 +571,5 @@ ${renderHead({
     </div>
   </body>
 </html>`
-  );
-}
-
-function writeRobots() {
-  writeFileSync(
-    join(distDir, 'robots.txt'),
-    `User-agent: *
-Allow: /
-
-Sitemap: ${absoluteUrl('/sitemap.xml')}
-`
   );
 }

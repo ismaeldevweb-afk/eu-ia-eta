@@ -12,7 +12,7 @@ O build também pré-renderiza as páginas públicas do blog para SEO:
 /robots.txt
 ```
 
-O sitemap é mantido manualmente em `public/sitemap.xml` e copiado para `dist/sitemap.xml` pelo Vite durante o build.
+O sitemap e o robots são mantidos manualmente em `public/sitemap.xml` e `public/robots.txt`, e copiados para `dist/` pelo Vite durante o build.
 
 ## Build
 
