@@ -34,6 +34,7 @@ writeHome();
 writeAbout();
 await writeArticles();
 writeSitemap();
+writeTextSitemap();
 writeRobots();
 
 function getSiteUrl() {
@@ -598,23 +599,14 @@ ${renderHead({
 }
 
 function writeSitemap() {
-  const latestPostDate = posts[0]?.date || new Date().toISOString().slice(0, 10);
-  const urls = [
-    { loc: absoluteUrl('/'), lastmod: latestPostDate },
-    ...posts.map((post) => ({
-      loc: absoluteUrl(blogUrl(post.slug)),
-      lastmod: post.date
-    })),
-    { loc: absoluteUrl('/sobre/'), lastmod: latestPostDate }
-  ];
+  const urls = getSitemapUrls();
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls
   .map(
     (url) => `  <url>
-    <loc>${escapeXml(url.loc)}</loc>
-    <lastmod>${escapeXml(url.lastmod)}</lastmod>
+    <loc>${escapeXml(url)}</loc>
   </url>`
   )
   .join('\n')}
@@ -624,12 +616,21 @@ ${urls
   writeFileSync(join(distDir, 'sitemap.xml'), xml);
 }
 
+function writeTextSitemap() {
+  writeFileSync(join(distDir, 'sitemap.txt'), `${getSitemapUrls().join('\n')}\n`);
+}
+
 function writeRobots() {
   const robots = `User-agent: *
 Allow: /
 
 Sitemap: ${absoluteUrl('/sitemap.xml')}
+Sitemap: ${absoluteUrl('/sitemap.txt')}
 `;
 
   writeFileSync(join(distDir, 'robots.txt'), robots);
+}
+
+function getSitemapUrls() {
+  return [absoluteUrl('/'), ...posts.map((post) => absoluteUrl(blogUrl(post.slug))), absoluteUrl('/sobre/')];
 }
