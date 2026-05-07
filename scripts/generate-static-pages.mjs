@@ -33,9 +33,6 @@ rmSync(join(distDir, 'sobre.html'), { force: true });
 writeHome();
 writeAbout();
 await writeArticles();
-writeSitemap();
-writeTextSitemap();
-writeRobots();
 
 function getSiteUrl() {
   return normalizeSiteUrl(
@@ -101,10 +98,6 @@ function escapeHtml(value) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
-}
-
-function escapeXml(value) {
-  return escapeHtml(value);
 }
 
 function escapeJson(value) {
@@ -596,41 +589,4 @@ ${renderHead({
   </body>
 </html>`
   );
-}
-
-function writeSitemap() {
-  const urls = getSitemapUrls();
-
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls
-  .map(
-    (url) => `  <url>
-    <loc>${escapeXml(url)}</loc>
-  </url>`
-  )
-  .join('\n')}
-</urlset>
-`;
-
-  writeFileSync(join(distDir, 'sitemap.xml'), xml);
-}
-
-function writeTextSitemap() {
-  writeFileSync(join(distDir, 'sitemap.txt'), `${getSitemapUrls().join('\n')}\n`);
-}
-
-function writeRobots() {
-  const robots = `User-agent: *
-Allow: /
-
-Sitemap: ${absoluteUrl('/sitemap.xml')}
-Sitemap: ${absoluteUrl('/sitemap.txt')}
-`;
-
-  writeFileSync(join(distDir, 'robots.txt'), robots);
-}
-
-function getSitemapUrls() {
-  return [absoluteUrl('/'), ...posts.map((post) => absoluteUrl(blogUrl(post.slug))), absoluteUrl('/sobre/')];
 }

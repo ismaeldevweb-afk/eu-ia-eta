@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://eu-ia-eta.vercel.app/sitemap.xml
+Sitemap: https://eu-ia-eta.vercel.app/sitemap.txt

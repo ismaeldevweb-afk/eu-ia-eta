@@ -78,9 +78,9 @@ Além do build do Vite, esse comando executa `scripts/generate-static-pages.mjs`
 - home com lista de artigos no HTML inicial;
 - artigos em `/blog/[slug]/`;
 - página Sobre em `/sobre/`;
-- `sitemap.xml`;
-- `robots.txt`;
 - canonical, Open Graph, Twitter Card e JSON-LD.
+
+Os arquivos `sitemap.xml`, `sitemap.txt` e `robots.txt` ficam manuais em `public/` e são copiados para `dist/` pelo Vite.
 
 ## Preview do build
 

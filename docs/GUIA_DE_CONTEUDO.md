@@ -214,5 +214,5 @@ Se o campo for removido, o código tem uma função para estimar o tempo a parti
 - Os prompts estão em `blockquote`.
 - O build passa com `npm run build`.
 - A página estática existe em `dist/blog/slug-do-artigo/index.html`.
-- O artigo aparece no `dist/sitemap.xml`.
+- O artigo foi adicionado manualmente em `public/sitemap.xml` e `public/sitemap.txt`.
 - Os links internos foram testados.

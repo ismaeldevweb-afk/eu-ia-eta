@@ -9,7 +9,7 @@ Status: pós-redesign, com geração estática SEO no build
 
 O blog está em bom estado para um MVP editorial estático. A principal evolução já foi implementada: os artigos deixaram de depender apenas de `article.html?slug=...` e passaram a ser gerados como páginas reais em `/blog/[slug]/`, com conteúdo HTML no carregamento inicial.
 
-Isso resolve o maior gargalo de SEO técnico. Agora a home, os artigos e a página Sobre recebem `title`, `description`, canonical, Open Graph, Twitter Card e JSON-LD. O build também gera `sitemap.xml` e `robots.txt`.
+Isso resolve o maior gargalo de SEO técnico. Agora a home, os artigos e a página Sobre recebem `title`, `description`, canonical, Open Graph, Twitter Card e JSON-LD. Os sitemaps e o `robots.txt` são mantidos manualmente em `public/`.
 
 Nota estimada atual: **8.2/10**
 
@@ -141,7 +141,7 @@ https://eu-ia-eta.vercel.app/blog/como-construi-ismael-dev-studio/
 https://eu-ia-eta.vercel.app/blog/making-of-blog-eu-ia/
 ```
 
-O sitemap inclui `lastmod`, o que é adequado para páginas estáticas.
+O sitemap foi mantido em formato mínimo, apenas com URLs, para reduzir risco de leitura no Search Console. Há também um fallback em texto puro em `/sitemap.txt`.
 
 ## Robots.txt
 
@@ -154,6 +154,7 @@ User-agent: *
 Allow: /
 
 Sitemap: https://eu-ia-eta.vercel.app/sitemap.xml
+Sitemap: https://eu-ia-eta.vercel.app/sitemap.txt
 ```
 
 Isso está correto para um blog público.

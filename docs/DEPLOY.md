@@ -9,10 +9,11 @@ O build também pré-renderiza as páginas públicas do blog para SEO:
 /sobre/
 /blog/[slug]/
 /sitemap.xml
+/sitemap.txt
 /robots.txt
 ```
 
-O sitemap é gerado automaticamente em `dist/sitemap.xml` pelo script de build. O `robots.txt` é mantido manualmente em `public/robots.txt` e copiado para `dist/` pelo Vite.
+Os sitemaps e o `robots.txt` são mantidos manualmente em `public/` e copiados para `dist/` pelo Vite. Quando criar ou remover páginas públicas, atualize `public/sitemap.xml`, `public/sitemap.txt` e `public/robots.txt` se necessário.
 
 ## Build
 
@@ -68,7 +69,7 @@ Use esse ajuste apenas se a URL final tiver o nome do repositório no caminho.
 
 ## Variáveis de ambiente
 
-Use `SITE_URL` para informar o domínio público final do blog. Essa variável é usada em canonical, sitemap, Open Graph e JSON-LD.
+Use `SITE_URL` para informar o domínio público final do blog. Essa variável é usada em canonical, Open Graph e JSON-LD. Os sitemaps manuais em `public/` também precisam ser atualizados se o domínio público mudar.
 
 Exemplo:
 

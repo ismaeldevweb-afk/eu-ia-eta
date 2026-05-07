@@ -226,9 +226,9 @@ Responsabilidades:
 - gerar `dist/blog/[slug]/index.html`;
 - gerar `dist/sobre/index.html`;
 - reescrever `dist/index.html` com cards estáticos;
-- gerar `dist/sitemap.xml` a partir de `public/data/posts.json`;
-- copiar `public/robots.txt` para `dist/robots.txt`;
 - injetar canonical, Open Graph, Twitter Card e JSON-LD.
+
+Os arquivos `sitemap.xml`, `sitemap.txt` e `robots.txt` são mantidos manualmente em `public/` e copiados para `dist/` pelo Vite.
 
 A URL pública é definida por `SITE_URL`. Sem essa variável, o fallback é `https://eu-ia-eta.vercel.app`.
 
