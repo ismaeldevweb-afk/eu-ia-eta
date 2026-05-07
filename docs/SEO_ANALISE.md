@@ -2,12 +2,12 @@
 
 Data da análise: 2026-05-03  
 Projeto analisado: Blog Eu + IA  
-Stack: HTML, CSS, TypeScript, Vite, Markdown, JSON e `marked`  
+Stack atual: Next.js, React, TypeScript, CSS, Markdown, JSON e `marked`
 Status: pós-redesign, com geração estática SEO no build
 
 ## Resumo executivo
 
-O blog está em bom estado para um MVP editorial estático. A principal evolução já foi implementada: os artigos deixaram de depender apenas de `article.html?slug=...` e passaram a ser gerados como páginas reais em `/blog/[slug]/`, com conteúdo HTML no carregamento inicial.
+O blog foi migrado para Next.js com App Router. A principal evolução técnica é que home, Sobre e artigos agora são rotas nativas do framework, com HTML inicial completo, metadata por rota e build mais previsível para indexação.
 
 Isso resolve o maior gargalo de SEO técnico. Agora a home, os artigos e a página Sobre recebem `title`, `description`, canonical, Open Graph, Twitter Card e JSON-LD. Os sitemaps e o `robots.txt` são mantidos manualmente em `public/`.
 

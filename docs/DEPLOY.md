@@ -1,19 +1,17 @@
 # Deploy
 
-O Eu + IA é um projeto estático gerado com Vite. Depois do build, a pasta `dist/` pode ser publicada em qualquer hospedagem de arquivos estáticos.
+O Eu + IA agora roda em Next.js com App Router. A Vercel deve usar o preset de Next.js e o output padrão do framework.
 
-O build também pré-renderiza as páginas públicas do blog para SEO:
+## Rotas públicas
 
 ```text
 /
 /sobre/
-/blog/[slug]/
+/blog/making-of-blog-eu-ia/
+/blog/como-construi-ismael-dev-studio/
 /sitemap.xml
-/sitemap.txt
 /robots.txt
 ```
-
-Os sitemaps e o `robots.txt` são mantidos manualmente em `public/` e copiados para `dist/` pelo Vite. Quando criar ou remover páginas públicas, atualize `public/sitemap.xml`, `public/sitemap.txt` e `public/robots.txt` se necessário.
 
 ## Build
 
@@ -21,99 +19,42 @@ Os sitemaps e o `robots.txt` são mantidos manualmente em `public/` e copiados p
 npm run build
 ```
 
-Saída:
-
-```text
-dist/
-```
-
 ## Preview local
 
 ```bash
-npm run preview
+npm run build
+npm run start
+```
+
+Com porta específica:
+
+```bash
+npm run start -- -p 3001
 ```
 
 ## Vercel
 
-Configuração recomendada:
-
 | Campo | Valor |
 | --- | --- |
-| Framework Preset | Vite |
+| Framework Preset | Next.js |
 | Build Command | `npm run build` |
-| Output Directory | `dist` |
 | Install Command | `npm install` |
+| Output | Padrão do Next.js |
 
-## Netlify
+## Variáveis
 
-Configuração recomendada:
-
-| Campo | Valor |
-| --- | --- |
-| Build command | `npm run build` |
-| Publish directory | `dist` |
-
-## GitHub Pages
-
-Para GitHub Pages, o projeto pode precisar de ajuste de `base` no Vite caso seja publicado em subpath.
-
-Exemplo:
-
-```ts
-export default defineConfig({
-  base: '/Blog-Eu-IA/'
-});
-```
-
-Use esse ajuste apenas se a URL final tiver o nome do repositório no caminho.
-
-## Variáveis de ambiente
-
-Use `SITE_URL` para informar o domínio público final do blog. Essa variável é usada em canonical, Open Graph e JSON-LD. Os sitemaps manuais em `public/` também precisam ser atualizados se o domínio público mudar.
-
-Exemplo:
+Use `NEXT_PUBLIC_SITE_URL` se o domínio público mudar. Essa variável alimenta canonical, Open Graph e JSON-LD.
 
 ```bash
-SITE_URL=https://eu-ia-eta.vercel.app npm run build
+NEXT_PUBLIC_SITE_URL=https://eu-ia-eta.vercel.app
 ```
 
-Se `SITE_URL` não for definida, o fallback é:
+O sitemap em `public/sitemap.xml` é manual. Se o domínio mudar ou novas páginas forem criadas, atualize o arquivo.
 
-```text
-https://eu-ia-eta.vercel.app
-```
+## Checklist
 
-## Validação antes de publicar
-
-```bash
-npm run build
-npm audit --audit-level=moderate
-```
-
-## Arquivos que não devem ir para produção
-
-Já estão ignorados no `.gitignore`:
-
-```text
-node_modules
-dist
-.env
-.DS_Store
-```
-
-## Pós-deploy
-
-Depois de publicar, valide:
-
-- home carrega;
-- cards aparecem no HTML inicial;
-- artigos abrem por `/blog/[slug]/`;
-- `/sobre/` abre corretamente;
-- `/sitemap.xml` abre corretamente;
-- `/robots.txt` aponta para o sitemap;
-- imagens dos artigos carregam;
-- filtro por tag funciona;
-- botões de copiar prompt funcionam em HTTPS;
-- links externos abrem corretamente;
-- canonical aponta para o domínio correto;
-- previews sociais funcionam no LinkedIn/WhatsApp.
+- `npm run typecheck`
+- `npm run build`
+- `/sitemap.xml` retorna `200`
+- `/robots.txt` aponta para o sitemap
+- canonical das páginas aponta para a URL pública correta

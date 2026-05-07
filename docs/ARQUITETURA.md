@@ -1,251 +1,52 @@
-# Arquitetura técnica
+# Arquitetura
 
-Este documento descreve como o blog Eu + IA está organizado e como os arquivos se conectam.
+O Eu + IA foi migrado para Next.js 14 com App Router. O objetivo da migração é simplificar indexação, remover o gerador estático próprio e deixar as páginas públicas em rotas nativas do framework.
 
-## Visão geral
-
-O projeto é uma aplicação estática multipágina com geração SEO no build:
-
-- `index.html`: página inicial.
-- `article.html`: fallback legado e rota de desenvolvimento para artigo.
-- `sobre.html`: página Sobre usada no desenvolvimento local.
-- `public/data/posts.json`: índice de posts.
-- `public/posts/*.md`: conteúdo dos artigos.
-- `src/*.ts`: renderização, carregamento e comportamento.
-- `src/styles.css`: design system e estilos globais.
-- `scripts/generate-static-pages.mjs`: gera HTML estático SEO em `dist/`.
-
-O Vite empacota as páginas base e, em seguida, o script de geração cria as rotas públicas finais:
+## Camadas
 
 ```text
-/blog/[slug]/
-/sobre/
-/sitemap.xml
-/robots.txt
+src/app/
+  layout.tsx
+  page.tsx
+  sobre/page.tsx
+  blog/[slug]/page.tsx
+src/lib/
+  site.ts
+  posts.ts
+public/
+  data/posts.json
+  posts/*.md
+  sitemap.xml
+  robots.txt
 ```
 
-## Entrada da home
+## Fluxo de conteúdo
 
-Arquivo:
-
-```text
-src/main.ts
-```
-
-Responsabilidades:
-
-- ler o filtro `?tag=`;
-- buscar posts via `loadPosts()`;
-- filtrar por tag quando necessário;
-- renderizar cada card com `renderPostCard()`;
-- exibir estado vazio ou erro.
-
-## Entrada do artigo
-
-Arquivo:
-
-```text
-src/article.ts
-```
-
-Responsabilidades:
-
-- ler o parâmetro `?slug=` ou a rota `/blog/[slug]/`;
-- buscar metadados no JSON;
-- buscar Markdown em `public/posts`;
-- converter Markdown para HTML com `marked`;
-- gerar IDs automáticos para `h2` e `h3`;
-- transformar blockquotes em blocos de prompt;
-- adicionar botão de copiar prompt;
-- renderizar rodapé com tags e navegação anterior/próximo.
-
-No build de produção, essa mesma lógica continua disponível no cliente, mas o HTML inicial do artigo já é gerado por `scripts/generate-static-pages.mjs`.
-
-## Componentes HTML
-
-Arquivo:
-
-```text
-src/components.ts
-```
-
-Componentes:
-
-- `renderTagBadge(tag, selectedTag)`;
-- `renderPostCard(post, selectedTag, index)`.
-
-Os componentes retornam strings HTML. Como os dados vêm de JSON/Markdown, os campos renderizados em strings passam por escape via `src/html.ts`.
-
-## Utilitários de posts
-
-Arquivo:
-
-```text
-src/posts.ts
-```
-
-Funções:
-
-- `loadPosts()`: busca e ordena os posts por data decrescente.
-- `formatLongDate(date)`: formata data em `pt-BR`.
-- `estimateReadingMinutes(markdown)`: calcula tempo estimado quando necessário.
-
-## Tipos
-
-Arquivo:
-
-```text
-src/types.ts
-```
-
-Tipo principal:
-
-```ts
-export interface Post {
-  slug: string;
-  title: string;
-  description: string;
-  date: string;
-  tags: string[];
-  readingMinutes?: number;
-}
-```
-
-## CSS
-
-Arquivo:
-
-```text
-src/styles.css
-```
-
-O CSS concentra:
-
-- tokens visuais;
-- layout da home;
-- cards;
-- página de artigo;
-- blocos de prompt;
-- figuras e imagens;
-- responsividade;
-- estados de foco e hover.
-
-Principais tokens:
-
-```css
---bg: #fdfbf7;
---bg-secondary: #f3f0eb;
---text: #1e1e1e;
---text-muted: #5c5c5c;
---accent: #2b6cb0;
---accent-soft: #e2eff9;
---prompt-bg: #eef2f5;
---prompt-border: #a0c4e8;
-```
-
-## Fluxo de renderização
-
-Home:
-
-```text
-index.html
-  -> src/main.ts
-    -> public/data/posts.json
-    -> src/components.ts
-    -> HTML dos cards
-```
-
-Artigo:
-
-```text
-/blog/[slug]/index.html
-  -> gerado por scripts/generate-static-pages.mjs
-    -> public/data/posts.json
-    -> public/posts/[slug].md
-    -> marked.parse()
-    -> HTML estático do artigo
-    -> canonical + OG + Twitter Card + JSON-LD BlogPosting
-```
-
-Fallback de desenvolvimento:
-
-```text
-/blog/[slug]/
-  -> vite.config.ts reescreve para article.html
-    -> src/article.ts
-    -> renderização no cliente
-```
+1. `public/data/posts.json` define slug, título, descrição, data, tags e tempo de leitura.
+2. `public/posts/*.md` guarda o conteúdo editorial.
+3. `src/lib/posts.ts` lê os arquivos no servidor, converte Markdown com `marked`, gera IDs para headings e transforma blockquotes em blocos de prompt.
+4. `src/app/blog/[slug]/page.tsx` cria páginas estáticas com `generateStaticParams`.
 
 ## Rotas
 
-Home:
-
 ```text
-/
+/                      Home
+/sobre/                Página Sobre
+/blog/[slug]/          Artigo
+/sitemap.xml           Sitemap manual
+/robots.txt            Robots manual
 ```
 
-Filtro por tag:
+`next.config.mjs` usa `trailingSlash: true` para preservar o padrão de URLs que o blog já usava antes da migração.
 
-```text
-/?tag=typescript
-```
+## SEO
 
-Artigo:
+- Metadata global em `src/app/layout.tsx`.
+- Metadata por artigo em `src/app/blog/[slug]/page.tsx`.
+- JSON-LD `WebSite`, `AboutPage` e `BlogPosting`.
+- Sitemap manual em `public/sitemap.xml` com apenas URLs canônicas.
+- `robots.txt` manual em `public/robots.txt`.
 
-```text
-/blog/making-of-blog-eu-ia/
-```
+## Interatividade
 
-Seção específica:
-
-```text
-/blog/making-of-blog-eu-ia/#o-prompt-inicial
-```
-
-Rota legada:
-
-```text
-/article.html?slug=making-of-blog-eu-ia
-```
-
-Essa rota permanece funcional, mas o HTML base tem `noindex, follow`.
-
-## Geração estática e SEO
-
-Arquivo:
-
-```text
-scripts/generate-static-pages.mjs
-```
-
-Responsabilidades:
-
-- ler `public/data/posts.json`;
-- ler cada Markdown em `public/posts`;
-- converter Markdown em HTML;
-- gerar `dist/blog/[slug]/index.html`;
-- gerar `dist/sobre/index.html`;
-- reescrever `dist/index.html` com cards estáticos;
-- injetar canonical, Open Graph, Twitter Card e JSON-LD.
-
-Os arquivos `sitemap.xml`, `sitemap.txt` e `robots.txt` são mantidos manualmente em `public/` e copiados para `dist/` pelo Vite.
-
-A URL pública é definida por `SITE_URL`. Sem essa variável, o fallback é `https://eu-ia-eta.vercel.app`.
-
-## Segurança básica
-
-Os dados vindos de `posts.json` são escapados antes de entrarem em strings HTML.
-
-O Markdown é convertido com `marked`. Hoje o conteúdo Markdown é confiável porque vem do próprio repositório. Se futuramente posts forem criados por usuários, CMS externo ou painel administrativo, será obrigatório sanitizar o HTML antes de renderizar.
-
-## Pontos de extensão
-
-Possíveis evoluções:
-
-- modo escuro;
-- busca local;
-- RSS;
-- páginas estáticas de tag;
-- imagens sociais 1200x630 por artigo;
-- comentários via Giscus;
-- paginação.
+O conteúdo principal é renderizado no servidor. A única hidratação específica do artigo é `PromptCopyEnhancer`, que ativa os botões de copiar prompt nos blockquotes.
