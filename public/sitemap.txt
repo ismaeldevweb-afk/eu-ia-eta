@@ -1,4 +1,11 @@
 https://eu-ia-eta.vercel.app/
-https://eu-ia-eta.vercel.app/blog/como-construi-ismael-dev-studio/
-https://eu-ia-eta.vercel.app/blog/making-of-blog-eu-ia/
 https://eu-ia-eta.vercel.app/sobre/
+https://eu-ia-eta.vercel.app/blog/making-of-blog-eu-ia/
+https://eu-ia-eta.vercel.app/?tag=prompt%20engineering
+https://eu-ia-eta.vercel.app/blog/como-construi-ismael-dev-studio/
+https://eu-ia-eta.vercel.app/?tag=nextjs
+https://eu-ia-eta.vercel.app/?tag=typescript
+https://eu-ia-eta.vercel.app/?tag=seo
+https://eu-ia-eta.vercel.app/?tag=vercel
+https://eu-ia-eta.vercel.app/?tag=html
+https://eu-ia-eta.vercel.app/?tag=css
