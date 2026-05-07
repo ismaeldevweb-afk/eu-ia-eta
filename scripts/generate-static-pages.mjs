@@ -6,7 +6,7 @@ const rootDir = process.cwd();
 const distDir = join(rootDir, 'dist');
 const postsPath = join(rootDir, 'public/data/posts.json');
 const postsDir = join(rootDir, 'public/posts');
-const siteUrl = normalizeSiteUrl(process.env.SITE_URL || 'https://eu-ia-eta.vercel.app');
+const siteUrl = getSiteUrl();
 const author = {
   name: 'Ismael Nunes dos Santos',
   url: 'https://www.linkedin.com/in/ismael-nunes-dos-santos'
@@ -34,6 +34,24 @@ writeHome();
 writeAbout();
 await writeArticles();
 writeSitemap();
+writeRobots();
+
+function getSiteUrl() {
+  return normalizeSiteUrl(
+    process.env.SITE_URL ||
+      withHttps(process.env.VERCEL_PROJECT_PRODUCTION_URL) ||
+      withHttps(process.env.VERCEL_URL) ||
+      'https://eu-ia-eta.vercel.app'
+  );
+}
+
+function withHttps(value) {
+  if (!value) {
+    return '';
+  }
+
+  return value.startsWith('http') ? value : `https://${value}`;
+}
 
 function normalizeSiteUrl(value) {
   return value.replace(/\/+$/, '');
@@ -82,6 +100,10 @@ function escapeHtml(value) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
+}
+
+function escapeXml(value) {
+  return escapeHtml(value);
 }
 
 function escapeJson(value) {
@@ -576,12 +598,14 @@ ${renderHead({
 }
 
 function writeSitemap() {
-  const lastmod = '2026-05-05T14:16:33-03:00';
+  const latestPostDate = posts[0]?.date || new Date().toISOString().slice(0, 10);
   const urls = [
-    { loc: siteUrl, lastmod, priority: '1.0' },
-    { loc: absoluteUrl('/blog/como-construi-ismael-dev-studio/'), lastmod, priority: '0.6' },
-    { loc: absoluteUrl('/blog/making-of-blog-eu-ia/'), lastmod, priority: '0.6' },
-    { loc: absoluteUrl('/sobre/'), lastmod, priority: '0.8' }
+    { loc: absoluteUrl('/'), lastmod: latestPostDate },
+    ...posts.map((post) => ({
+      loc: absoluteUrl(blogUrl(post.slug)),
+      lastmod: post.date
+    })),
+    { loc: absoluteUrl('/sobre/'), lastmod: latestPostDate }
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -589,9 +613,8 @@ function writeSitemap() {
 ${urls
   .map(
     (url) => `  <url>
-    <loc>${url.loc}</loc>
-    <lastmod>${url.lastmod}</lastmod>
-    <priority>${url.priority}</priority>
+    <loc>${escapeXml(url.loc)}</loc>
+    <lastmod>${escapeXml(url.lastmod)}</lastmod>
   </url>`
   )
   .join('\n')}
@@ -599,4 +622,14 @@ ${urls
 `;
 
   writeFileSync(join(distDir, 'sitemap.xml'), xml);
+}
+
+function writeRobots() {
+  const robots = `User-agent: *
+Allow: /
+
+Sitemap: ${absoluteUrl('/sitemap.xml')}
+`;
+
+  writeFileSync(join(distDir, 'robots.txt'), robots);
 }
