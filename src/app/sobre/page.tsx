@@ -84,7 +84,7 @@ export default function AboutPage() {
               <a className="button-link is-secondary" href={author.url}>
                 LinkedIn
               </a>
-              <a className="button-link is-secondary" href="https://github.com/ismaeldevweb-afk/Blog-Eu-IA">
+              <a className="button-link is-secondary" href="https://github.com/ismaeldevweb-afk/eu-ia-eta">
                 GitHub
               </a>
             </div>

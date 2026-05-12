@@ -115,7 +115,7 @@ Com isso, o artigo deixa de depender apenas do JavaScript para existir. O conte�
 
 Para deixar o making-of mais útil como portfólio, deixei os links principais reunidos aqui:
 
-- [Repositório do Blog Eu + IA no GitHub](https://github.com/ismaeldevweb-afk/Blog-Eu-IA);
+- [Repositório do Blog Eu + IA no GitHub](https://github.com/ismaeldevweb-afk/eu-ia-eta);
 - [Página inicial do Blog Eu + IA](/);
 - [Meu perfil no LinkedIn](https://www.linkedin.com/in/ismael-nunes-dos-santos).
 

@@ -124,7 +124,7 @@ export function Footer() {
       </nav>
       <nav className="footer-nav" aria-label="Links externos">
         <strong>Conectar</strong>
-        <a href="https://github.com/ismaeldevweb-afk/Blog-Eu-IA">GitHub</a>
+        <a href="https://github.com/ismaeldevweb-afk/eu-ia-eta">GitHub</a>
         <a href={author.url}>LinkedIn</a>
       </nav>
       <div className="footer-stack" aria-label="Tecnologias usadas">
