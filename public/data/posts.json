@@ -1,5 +1,14 @@
 [
   {
+    "slug": "corrigindo-sitemap-google-search-console-blog-eu-ia",
+    "title": "Corrigindo o sitemap do Blog Eu + IA: problemas reais com Google Search Console",
+    "seoTitle": "Corrigindo sitemap no Google Search Console",
+    "description": "Continuação do making-of do blog: ajustes de repositório, sitemap, robots.txt, rotas do Next.js e os problemas reais para fazer o Google ler o site.",
+    "date": "2026-05-12",
+    "tags": ["seo", "nextjs", "google search console", "sitemap"],
+    "readingMinutes": 9
+  },
+  {
     "slug": "como-construi-ismael-dev-studio",
     "title": "Como construí o Ismael Dev Studio: do planejamento ao deploy",
     "seoTitle": "Como construí o Ismael Dev Studio",

@@ -12,6 +12,10 @@ const sitemapEntries = [
     priority: "0.80",
   },
   {
+    loc: `${siteUrl}/blog/corrigindo-sitemap-google-search-console-blog-eu-ia/`,
+    priority: "0.80",
+  },
+  {
     loc: `${siteUrl}/?tag=prompt%20engineering`,
     priority: "0.80",
   },
