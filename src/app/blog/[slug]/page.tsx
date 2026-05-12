@@ -14,9 +14,9 @@ import {
 import { absoluteUrl, author, blogPath, site } from "@/lib/site";
 
 interface ArticlePageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -28,7 +28,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
-  const post = await getPost(params.slug);
+  const { slug } = await params;
+  const post = await getPost(slug);
 
   if (!post) {
     return {};
@@ -71,8 +72,9 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
+  const { slug } = await params;
   const posts = await getPosts();
-  const post = posts.find((item) => item.slug === params.slug);
+  const post = posts.find((item) => item.slug === slug);
 
   if (!post) {
     notFound();
