@@ -10,7 +10,7 @@ src/app/
   page.tsx
   sobre/page.tsx
   blog/[slug]/page.tsx
-  sitemap.ts
+  sitemap.xml/route.ts
   robots.ts
 src/lib/
   site.ts
@@ -33,7 +33,7 @@ public/
 /                      Home
 /sobre/                Página Sobre
 /blog/[slug]/          Artigo
-/sitemap.xml           Sitemap gerado pelo App Router
+/sitemap.xml           Sitemap XML customizado
 /robots.txt            Robots gerado pelo App Router
 ```
 
@@ -44,7 +44,7 @@ public/
 - Metadata global em `src/app/layout.tsx`.
 - Metadata por artigo em `src/app/blog/[slug]/page.tsx`.
 - JSON-LD `WebSite`, `AboutPage` e `BlogPosting`.
-- Sitemap em `src/app/sitemap.ts` com apenas URLs canônicas.
+- Sitemap em `src/app/sitemap.xml/route.ts` com XML customizado e URLs canônicas.
 - `robots.txt` em `src/app/robots.ts` apontando para o sitemap canônico.
 
 ## Interatividade

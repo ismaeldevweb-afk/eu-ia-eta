@@ -42,7 +42,7 @@ src/
     sobre/page.tsx           Página Sobre
     blog/[slug]/page.tsx     Artigos estáticos
     layout.tsx               Metadados globais
-    sitemap.ts               Sitemap gerado pelo App Router
+    sitemap.xml/route.ts     Sitemap XML customizado
     robots.ts                Robots apontando para o sitemap
   lib/
     posts.ts                 Leitura e renderização de Markdown
@@ -73,7 +73,7 @@ As URLs públicas seguem o padrão:
 
 O App Router gera HTML inicial completo para home, Sobre e artigos. Cada artigo tem metadata própria, canonical, Open Graph, Twitter Card e JSON-LD `BlogPosting`.
 
-O sitemap é gerado em `src/app/sitemap.ts` a partir das URLs canônicas e dos metadados dos artigos.
+O sitemap é servido por `src/app/sitemap.xml/route.ts` com XML customizado e URLs canônicas.
 
 ## Deploy
 

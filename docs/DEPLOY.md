@@ -49,7 +49,7 @@ Use `NEXT_PUBLIC_SITE_URL` se o domínio público mudar. Essa variável alimenta
 NEXT_PUBLIC_SITE_URL=https://eu-ia-eta.vercel.app
 ```
 
-O sitemap é gerado em `src/app/sitemap.ts` a partir de `public/data/posts.json`.
+O sitemap é servido por `src/app/sitemap.xml/route.ts` com XML customizado.
 
 ## Checklist
 
