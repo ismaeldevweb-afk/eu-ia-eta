@@ -10,14 +10,14 @@ src/app/
   page.tsx
   sobre/page.tsx
   blog/[slug]/page.tsx
+  sitemap.ts
+  robots.ts
 src/lib/
   site.ts
   posts.ts
 public/
   data/posts.json
   posts/*.md
-  sitemap.xml
-  robots.txt
 ```
 
 ## Fluxo de conteúdo
@@ -33,8 +33,8 @@ public/
 /                      Home
 /sobre/                Página Sobre
 /blog/[slug]/          Artigo
-/sitemap.xml           Sitemap manual
-/robots.txt            Robots manual
+/sitemap.xml           Sitemap gerado pelo App Router
+/robots.txt            Robots gerado pelo App Router
 ```
 
 `next.config.mjs` usa `trailingSlash: true` para preservar o padrão de URLs que o blog já usava antes da migração.
@@ -44,8 +44,8 @@ public/
 - Metadata global em `src/app/layout.tsx`.
 - Metadata por artigo em `src/app/blog/[slug]/page.tsx`.
 - JSON-LD `WebSite`, `AboutPage` e `BlogPosting`.
-- Sitemap manual em `public/sitemap.xml` com apenas URLs canônicas.
-- `robots.txt` manual em `public/robots.txt`.
+- Sitemap em `src/app/sitemap.ts` com apenas URLs canônicas.
+- `robots.txt` em `src/app/robots.ts` apontando para o sitemap canônico.
 
 ## Interatividade
 

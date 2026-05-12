@@ -43,13 +43,13 @@ npm run start -- -p 3001
 
 ## Variáveis
 
-Use `NEXT_PUBLIC_SITE_URL` se o domínio público mudar. Essa variável alimenta canonical, Open Graph e JSON-LD.
+Use `NEXT_PUBLIC_SITE_URL` se o domínio público mudar. Essa variável alimenta canonical, Open Graph, JSON-LD, sitemap e `robots.txt`.
 
 ```bash
 NEXT_PUBLIC_SITE_URL=https://eu-ia-eta.vercel.app
 ```
 
-O sitemap em `public/sitemap.xml` é manual. Se o domínio mudar ou novas páginas forem criadas, atualize o arquivo.
+O sitemap é gerado em `src/app/sitemap.ts` a partir de `public/data/posts.json`.
 
 ## Checklist
 
@@ -57,4 +57,5 @@ O sitemap em `public/sitemap.xml` é manual. Se o domínio mudar ou novas págin
 - `npm run build`
 - `/sitemap.xml` retorna `200`
 - `/robots.txt` aponta para o sitemap
+- envie no Search Console a URL exata `https://eu-ia-eta.vercel.app/sitemap.xml`, sem barra final
 - canonical das páginas aponta para a URL pública correta

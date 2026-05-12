@@ -214,5 +214,5 @@ Se o campo for removido, o código tem uma função para estimar o tempo a parti
 - Os prompts estão em `blockquote`.
 - O build passa com `npm run build`.
 - A rota `/blog/slug-do-artigo/` abre corretamente.
-- O artigo foi adicionado manualmente em `public/sitemap.xml`.
+- O artigo aparece em `/sitemap.xml` após entrar em `public/data/posts.json`.
 - Os links internos foram testados.

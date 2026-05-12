@@ -42,6 +42,8 @@ src/
     sobre/page.tsx           Página Sobre
     blog/[slug]/page.tsx     Artigos estáticos
     layout.tsx               Metadados globais
+    sitemap.ts               Sitemap gerado pelo App Router
+    robots.ts                Robots apontando para o sitemap
   lib/
     posts.ts                 Leitura e renderização de Markdown
     site.ts                  Configuração pública do site
@@ -49,8 +51,6 @@ src/
 public/
   data/posts.json            Metadados dos artigos
   posts/*.md                 Conteúdo em Markdown
-  sitemap.xml                Sitemap manual conservador
-  robots.txt                 Robots apontando para o sitemap
 ```
 
 ## Conteúdo
@@ -59,8 +59,7 @@ Para publicar um artigo:
 
 1. Crie o Markdown em `public/posts/slug-do-artigo.md`.
 2. Adicione os metadados em `public/data/posts.json`.
-3. Atualize `public/sitemap.xml` com a URL canônica do artigo.
-4. Rode `npm run build`.
+3. Rode `npm run build`.
 
 As URLs públicas seguem o padrão:
 
@@ -74,7 +73,7 @@ As URLs públicas seguem o padrão:
 
 O App Router gera HTML inicial completo para home, Sobre e artigos. Cada artigo tem metadata própria, canonical, Open Graph, Twitter Card e JSON-LD `BlogPosting`.
 
-O sitemap é manual e lista apenas URLs canônicas, evitando páginas filtradas por query string.
+O sitemap é gerado em `src/app/sitemap.ts` a partir das URLs canônicas e dos metadados dos artigos.
 
 ## Deploy
 
